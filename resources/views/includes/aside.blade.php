@@ -19,55 +19,33 @@
             </li>
 
             <li class="sidebar-header">
-                Vehicles
+                Players
             </li>
-            <li class="sidebar-item {{ request()->is('vehicles') ? 'active' : '' }}">
-                <a class="sidebar-link" href="{{ route('vehicles.index') }}">
-                    <i class="align-middle" data-feather="truck"></i>
-                    <span class="align-middle">All Vehicles</span>
+            <li class="sidebar-item {{ request()->is('playerss') ? 'active' : '' }}">
+                <a class="sidebar-link" href="{{ route('playerss.index') }}">
+                    <i class="align-middle" data-feather="users"></i>
+                    <span class="align-middle">All Players</span>
                 </a>
             </li>
-            @if( $role != 'user')
+            @if( $role == 'admin')
 
-                <li class="sidebar-item {{ request()->is('vehicles/upload*') ? 'active' : '' }} ">
-                    <a data-target="#upload" data-toggle="collapse" class="sidebar-link {{ request()->is('users/*') ? 'collapsed' : '' }}">
+                <li class="sidebar-item {{ request()->is('playerss/create') ? 'active' : '' }}">
+                    <a class="sidebar-link" href="{{ route('playerss.create') }}">
                         <i class="align-middle" data-feather="plus-square"></i>
-                        <span class="align-middle">Upload Files</span>
+                        <span class="align-middle">Add New Player</span>
                     </a>
-                    <ul id="upload"
-                        class="sidebar-dropdown list-unstyled collapse {{ request()->is('vehicles/upload*') ? 'show' : '' }}"
-                        data-parent="#sidebar">
-
-                        <li class="sidebar-item {{ request()->is('vehicles/upload/buy') ? 'active' : '' }}">
-                            <a class="sidebar-link" href="{{ route('upload.create.buy') }}">
-                                <i class="align-middle" data-feather="plus-square"></i>
-                                <span class="align-middle">Buy</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item {{ request()->is('vehicles/upload/inventory') ? 'active' : '' }}">
-                            <a class="sidebar-link" href="{{ route('upload.create.inventory') }}">
-                                <i class="align-middle" data-feather="plus-square"></i>
-                                <span class="align-middle">Inventory</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item {{ request()->is('vehicles/upload/sold') ? 'active' : '' }}">
-                            <a class="sidebar-link" href="{{ route('upload.create.sold') }}">
-                                <i class="align-middle" data-feather="plus-square"></i>
-                                <span class="align-middle">Sold</span>
-                            </a>
-                        </li>
-
-
-
-                    </ul>
                 </li>
+            @endif
 
-                <li class="sidebar-item {{ request()->is('vehicles/create') ? 'active' : '' }}">
-                    <a class="sidebar-link" href="{{ route('vehicles.create') }}">
+            <li class="sidebar-header">
+                Matches
+            </li>
+            @if( $role == 'admin')
+
+                <li class="sidebar-item {{ request()->is('playerss/create') ? 'active' : '' }}">
+                    <a class="sidebar-link" href="{{ route('playerss.create') }}">
                         <i class="align-middle" data-feather="plus-square"></i>
-                        <span class="align-middle">Add New Vehicle</span>
+                        <span class="align-middle">Add New Match</span>
                     </a>
                 </li>
             @endif

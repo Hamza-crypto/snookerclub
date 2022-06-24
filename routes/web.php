@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatatableController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LocationsController;
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VehicleController;
@@ -24,6 +25,9 @@ use Rap2hpoutre\LaravelLogViewer\LogViewerController;
  */
 
 
+Route::get('/test', function (){
+
+});
 Route::redirect('/', '/dashboard');
 
 
@@ -62,7 +66,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(
         ['middleware' => 'admin',
         ], function () {
-        Route::get('logs', [LogViewerController::class, 'index']);
+
+        Route::resource('playerss', PlayerController::class);
 
         Route::get('vehicles/upload/buy', [VehicleController::class, 'create_upload_buy'])->name('upload.create.buy');
         Route::get('vehicles/upload/inventory', [VehicleController::class, 'create_upload_inventory'])->name('upload.create.inventory');
@@ -81,6 +86,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::resource('vehicles', VehicleController::class)->except('index');
         Route::resource('locations', LocationsController::class);
+
 
 
         Route::resource('users', UsersController::class);

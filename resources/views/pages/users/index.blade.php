@@ -77,7 +77,7 @@
                                         <span class="badge badge-success">{{$user->role}}</span>
                                     @elseif($user->role == 'user')
                                         <span class="badge badge-secondary">{{$user->role}}</span>
-                                    @elseif($user->role == 'assistant')
+                                    @elseif($user->role == 'moderator')
                                         <span class="badge badge-info">{{$user->role}}</span>
                                     @endif
                                 </td>
