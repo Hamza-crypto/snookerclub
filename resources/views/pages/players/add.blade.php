@@ -17,42 +17,6 @@
 
         });
 
-
-        $('#add_location').click(function () {
-            var location = $('#new_location').val();
-
-            if (location.length > 0) {
-
-                let url = "{{ route('location.add', ':id' )  }}";
-                url = url.replace(':id', location);
-
-                console.log(url);
-
-                $.ajax({
-                    url: url,
-                    success: function (msg) {
-                        console.log("Success: " + msg);
-                        window.notyf.open({
-                            'type': 'success',
-                            'message': "Location Added",
-                            'duration': 10000,
-                            'ripple': true,
-                            'dismissible': true
-                        });
-
-                        $('#location').append(' <option value=" ' + location + ' "> ' + location + ' </option>');
-                    },
-                    error: function (err) {
-                        console.log("Error sending data to server: " + err);
-                    }
-                });
-
-            } else {
-                alert('Please select any row');
-            }
-
-
-        });
     </script>
 
 @endsection
@@ -76,7 +40,7 @@
                         <x-alert type="warning">{{ session('warning') }}</x-alert>
                     @endif
 
-                    <form method="post" action="{{ route('playerss.store') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('admin.players.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">

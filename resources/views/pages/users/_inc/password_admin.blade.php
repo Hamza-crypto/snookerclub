@@ -4,7 +4,7 @@
             <h5 class="card-title">Change Password</h5>
 
 
-            <form method="post" action="{{ route('user.password_update' ,$user->id) }}">
+            <form method="post" action="{{ route('admin.user.password_update' ,$user->id) }}">
                 @csrf
                 @method('POST')
 

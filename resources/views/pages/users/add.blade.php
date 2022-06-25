@@ -27,7 +27,7 @@
                         <x-alert type="success">{{ session('success') }}</x-alert>
                     @endif
 
-                    <form method="post" action="{{ route('users.store') }}">
+                    <form method="post" action="{{ route('admin.users.store') }}">
                         @csrf
 
                         <x-input type="text" name="name" label="{{ __('Name') }}" placeholder="{{ __('Enter your name') }}"></x-input>
@@ -40,7 +40,7 @@
                             <select id="role" class="form-control select2 @error('role') is-invalid @enderror" name="role" data-toggle="select2">
                                 <option value="moderator" @if(old('role') == 'moderator') selected @endif>{{ __('Moderator') }}</option>
                                 <option value="user" @if(old('role') == 'user') selected @endif>{{ __('User') }}</option>
-                                <option value="admin" @if(old('role') == 'admin') selected @endif>{{ __('Admin') }}</option>
+                                <option value="admin" @if(old('role') == 'admin') selected @endif>{{ __('  Admin') }}</option>
                             </select>
                             @error('role')
                                 <div class="invalid-feedback">

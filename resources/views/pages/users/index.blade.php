@@ -89,20 +89,20 @@
 
 
 
-                                    <a href="{{ route('users.edit', $user->id) }}" class="btn" style="display: inline">
+                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn" style="display: inline">
                                         <i class="fa fa-edit text-info"></i>
                                     </a>
 
 
                                     @if (auth()->user()->id != $user->id)
-                                        <form method="post" action="{{ route('users.destroy', $user->id) }}"
+                                        <form method="post" action="{{ route('admin.users.destroy', $user->id) }}"
                                               onsubmit="return confirmSubmission(this, 'Are you sure you want to delete user ' + '{{ "$user->name"  }}')"
                                               style="display: inline">
                                             @csrf
                                             @method('DELETE')
 
                                             <button class="btn text-danger"
-                                                    href="{{ route('users.destroy', $user->id) }}">
+                                                    href="{{ route('admin.users.destroy', $user->id) }}">
                                                 <i class="fa fa-trash"></i>
 
                                             </button>

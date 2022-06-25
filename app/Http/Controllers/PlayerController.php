@@ -43,7 +43,7 @@ class PlayerController extends Controller
             ]);
 
         Session::flash('success', 'Player successfully added.');
-        return redirect()->route('playerss.create');
+        return redirect()->route('admin.players.create');
 
 
     }
@@ -86,6 +86,6 @@ class PlayerController extends Controller
     {
         $player->delete();
         Session::flash('success', 'Player deleted successfully.');
-        return redirect()->route('playerss.index');
+        return redirect()->route('admin.players.index');
     }
 }

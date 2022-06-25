@@ -21,16 +21,16 @@
             <li class="sidebar-header">
                 Players
             </li>
-            <li class="sidebar-item {{ request()->is('playerss') ? 'active' : '' }}">
-                <a class="sidebar-link" href="{{ route('playerss.index') }}">
+            <li class="sidebar-item {{ request()->is('players') ? 'active' : '' }}">
+                <a class="sidebar-link" href="{{ route('admin.players.index') }}">
                     <i class="align-middle" data-feather="users"></i>
                     <span class="align-middle">All Players</span>
                 </a>
             </li>
             @if( $role == 'admin')
 
-                <li class="sidebar-item {{ request()->is('playerss/create') ? 'active' : '' }}">
-                    <a class="sidebar-link" href="{{ route('playerss.create') }}">
+                <li class="sidebar-item {{ request()->is('players/create') ? 'active' : '' }}">
+                    <a class="sidebar-link" href="{{ route('admin.players.create') }}">
                         <i class="align-middle" data-feather="plus-square"></i>
                         <span class="align-middle">Add New Player</span>
                     </a>
@@ -42,8 +42,8 @@
             </li>
             @if( $role == 'admin')
 
-                <li class="sidebar-item {{ request()->is('playerss/create') ? 'active' : '' }}">
-                    <a class="sidebar-link" href="{{ route('playerss.create') }}">
+                <li class="sidebar-item {{ request()->is('players/create') ? 'active' : '' }}">
+                    <a class="sidebar-link" href="{{ route('admin.players.create') }}">
                         <i class="align-middle" data-feather="plus-square"></i>
                         <span class="align-middle">Add New Match</span>
                     </a>
@@ -65,41 +65,15 @@
                         data-parent="#sidebar">
 
                         <li class="sidebar-item {{ request()->is('users') ? 'active' : '' }}">
-                            <a class="sidebar-link" href="{{ route('users.index') }}">
+                            <a class="sidebar-link" href="{{ route('admin.users.index') }}">
                                 <i class="align-middle" data-feather="users"></i>
                                 <span class="align-middle">All Users</span>
                             </a>
                         </li>
                         <li class="sidebar-item {{ request()->is('users/create') ? 'active' : '' }}">
-                            <a class="sidebar-link" href="{{ route('users.create') }}">
+                            <a class="sidebar-link" href="{{ route('admin.users.create') }}">
                                 <i class="align-middle" data-feather="user-plus"></i>
                                 <span class="align-middle">Add New User</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            @endif
-
-            @if( $role != 'user')
-                <li class="sidebar-item {{ request()->is('locations*') ? 'active' : '' }} ">
-                    <a data-target="#locations" data-toggle="collapse" class="sidebar-link {{ request()->is('users/*') ? 'collapsed' : '' }}">
-                        <i class="align-middle" data-feather="map-pin"></i>
-                        <span class="align-middle">Locations</span>
-                    </a>
-                    <ul id="locations"
-                        class="sidebar-dropdown list-unstyled collapse {{ request()->is('locations*') ? 'show' : '' }}"
-                        data-parent="#sidebar">
-
-                        <li class="sidebar-item {{ request()->is('locations') ? 'active' : '' }}">
-                            <a class="sidebar-link" href="{{ route('locations.index') }}">
-                                <i class="align-middle" data-feather="map-pin"></i>
-                                <span class="align-middle">All Location</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item {{ request()->is('locations/create') ? 'active' : '' }}">
-                            <a class="sidebar-link" href="{{ route('locations.create') }}">
-                                <i class="align-middle" data-feather="plus"></i>
-                                <span class="align-middle">Add New Location</span>
                             </a>
                         </li>
                     </ul>

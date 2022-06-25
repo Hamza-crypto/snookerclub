@@ -1,5 +1,6 @@
 /node_modules
 /public/*
+/storage/*
 *.key
 *.log
 /vendor

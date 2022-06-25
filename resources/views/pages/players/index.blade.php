@@ -65,20 +65,20 @@
                                     title="{{ $player->created_at }}">{{ $player->created_at->diffForHumans() }}</td>
                                 <td class="table-action">
 
-                                    <a href="{{ route('playerss.edit', $player->id) }}" class="btn"
+                                    <a href="{{ route('admin.players.edit', $player->id) }}" class="btn"
                                        style="display: inline">
                                         <i class="fa fa-edit text-info"></i>
                                     </a>
 
 
-                                    <form method="post" action="{{ route('playerss.destroy', $player->id) }}"
+                                    <form method="post" action="{{ route('admin.players.destroy', $player->id) }}"
                                           onsubmit="return confirmSubmission(this, 'Are you sure you want to delete player ' + '{{ "$player->name"  }}')"
                                           style="display: inline">
                                         @csrf
                                         @method('DELETE')
 
                                         <button class="btn text-danger"
-                                                href="{{ route('playerss.destroy', $player->id) }}">
+                                                href="{{ route('admin.players.destroy', $player->id) }}">
                                             <i class="fa fa-trash"></i>
 
                                         </button>
