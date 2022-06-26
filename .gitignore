@@ -3,6 +3,7 @@
 /storage/*
 *.key
 *.log
+*.lock
 /vendor
 .env
 .env.backup
