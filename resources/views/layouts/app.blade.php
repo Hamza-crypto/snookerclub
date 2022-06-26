@@ -19,10 +19,20 @@
 
 <div class="wrapper">
 
-    @include('includes.aside')
+    @auth
+        @include('includes.aside')
+    @endauth
+
 
     <div class="main" >
-        @include('includes.header')
+
+        @auth
+            @include('includes.header')
+        @endauth
+
+        @guest
+            @include('includes.header-guest')
+        @endguest
 
         <main class="content">
             <div class="container-fluid p-0">
