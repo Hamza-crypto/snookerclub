@@ -2,15 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Tournament;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TournamentFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
+    protected $model = Tournament::class;
+
     public function definition()
     {
         // generate random number in ange
