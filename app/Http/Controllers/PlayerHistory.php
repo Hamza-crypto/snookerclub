@@ -26,7 +26,7 @@ class PlayerHistory extends Controller
 
             $graph_data['labels'] = [$player2->name, $player1->name];
 
-            $matches = Match::whereIn('player_1',[$player1->id, $player2->id] )
+            $matches = Match::WhereIn('player_1',[$player1->id, $player2->id] )
                 ->WhereIn('player_2',[$player1->id, $player2->id] )
                 ->get();
 
