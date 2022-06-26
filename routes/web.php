@@ -2,14 +2,11 @@
 
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ImageController;
-use App\Http\Controllers\LocationsController;
-use App\Http\Controllers\MatchController;
+use App\Http\Controllers\TournamentController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\PlayerHistory;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,9 +30,7 @@ Route::get('/', [PlayerHistory::class, 'index'])->name('homepage.index');
 
 
 Route::get('/reset', function () {
-    DB::table('matches')->truncate();
-    DB::table('players')->truncate();
-    \Artisan::call('migrate:refresh');
+    \Artisan::call('migrate:fresh');
     \Artisan::call('db:seed');
     \Artisan::call('optimize:clear');
     dd('Database cleared');
@@ -56,7 +51,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::impersonate();
 
-    Route::resource('matches', MatchController::class);
+    Route::resource('matches', TournamentController::class);
 
     Route::group(
         [

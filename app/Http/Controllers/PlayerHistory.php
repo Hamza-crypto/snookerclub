@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Match;
+use App\Models\Tournament;
 use App\Models\Player;
 use Illuminate\Http\Request;
 
@@ -26,7 +26,7 @@ class PlayerHistory extends Controller
 
             $graph_data['labels'] = [$player2->name, $player1->name];
 
-            $matches = Match::WhereIn('player_1',[$player1->id, $player2->id] )
+            $matches = Tournament::WhereIn('player_1',[$player1->id, $player2->id] )
                 ->WhereIn('player_2',[$player1->id, $player2->id] )
                 ->get();
 
