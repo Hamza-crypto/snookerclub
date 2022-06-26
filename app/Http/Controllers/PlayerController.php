@@ -12,7 +12,6 @@ class PlayerController extends Controller
 
     public function index()
     {
-
         $players = Player::latest()->get();
         return view('pages.players.index', compact('players'));
     }
@@ -34,52 +33,27 @@ class PlayerController extends Controller
         } else {
             $fileName = null;
         }
-        Player::create(
-            [
-                'name' => $request->name,
-                'dob' => $request->dob,
-                'birth_place' => $request->birth_place,
-                'image' => $fileName,
-            ]);
+
+
+        $year = substr($request->professional_since, 0, 4);
+
+        Player::create([
+            'name' => $request->name,
+            'dob' => $request->dob,
+            'birth_place' => $request->birth_place,
+            'residence' => $request->residence,
+            'plays_with' => $request->plays_with,
+            'professional_since' => $year,
+            'won_lost' => $request->won_lost,
+            'titles' => $request->titles,
+            'earnings' => $request->earnings,
+            'image' => $fileName,
+        ]);
 
         Session::flash('success', 'Player successfully added.');
         return redirect()->route('admin.players.create');
 
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Player  $player
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Player $player)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Player  $player
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Player $player)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Player  $player
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Player $player)
-    {
-        //
     }
 
     public function destroy(Player $player)

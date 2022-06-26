@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Add Player')
+@section('title', 'Add Match')
 
+@php
+$player1 = get_player_name($match->player_1 );
+$player2 = get_player_name($match->player_2 );
+
+@endphp
 @section('scripts')
     <script>
         $(document).ready(function () {
@@ -22,7 +27,7 @@
 @endsection
 @section('content')
 
-    <h1 class="h3 mb-3">Add New Player </h1>
+    <h1 class="h3 mb-3">Edit Match </h1>
 
     <div class="row">
 
@@ -40,45 +45,33 @@
                         <x-alert type="warning">{{ session('warning') }}</x-alert>
                     @endif
 
-                    <form method="post" action="{{ route('admin.players.store') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('matches.update', $match->id) }}" >
                         @csrf
+                        @method('PUT')
 
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
-                                    <label for="number">Name</label>
+                                    <label for="tournament">Tournament</label>
                                     <input
                                         class="form-control form-control-lg"
                                         type="text"
-                                        name="name"
-                                        placeholder="Enter player name"
+                                        value="{{ $match->tournament }}"
+                                        disabled
                                     />
                                 </div>
 
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
-                                    <label for="number">DOB</label>
+                                    <label for="year">Year</label>
 
                                     <input
                                         class="form-control form-control-lg daterange"
                                         type="text"
-                                        name="dob"
-                                    />
-
-                                </div>
-
-                            </div>
-
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="number">Birth Place</label>
-                                    <input
-                                        class="form-control form-control-lg"
-                                        type="text"
-                                        name="birth_place"
-                                        placeholder="Enter birth place"
+                                        value="{{ $match->year }}"
+                                        disabled
                                     />
 
                                 </div>
@@ -88,106 +81,95 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-sm">
                                 <div class="form-group">
-                                    <label for="number">Residence</label>
+                                    <label class="form-label" for="players"> Player 1 </label>
                                     <input
                                         class="form-control form-control-lg"
                                         type="text"
-                                        name="residence"
-                                        placeholder="Enter player residence"
+                                        value="{{ get_player_name($match->player_1 ) }}"
+                                        disabled
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label class="form-label" for="players"> Player 2 </label>
+                                    <input
+                                        class="form-control form-control-lg"
+                                        type="text"
+                                        value="{{ get_player_name($match->player_2 ) }}"
+                                        disabled
+                                    />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="rules">Rules</label>
+                                    <input
+                                        class="form-control form-control-lg"
+                                        type="text"
+                                        value="{{ $match->rules }}"
+                                        disabled
                                     />
                                 </div>
 
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
-                                    <label for="plays_with">Plays with</label>
-                                    <select name="plays_with" id="plays_with"
+                                    <label for="rounds">Rounds</label>
+                                    <input
+                                        class="form-control form-control-lg"
+                                        type="text"
+                                        name="rounds"
+                                        placeholder="Enter rounds"
+                                    />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="winner">Winner</label>
+                                    <select name="winner" id="winner"
                                             class="form-control form-select">
-                                        <option value="Right-handed" selected> Right handed</option>
-                                        <option value="Left-handed"> Left handed</option>
+                                        <option value="-100" selected> Select Winner</option>
+                                        <option value="{{ $match->player_1 }}"> {{ $player1 }}</option>
+                                        <option value="{{ $match->player_2 }}"> {{ $player2 }}</option>
+
                                     </select>
                                 </div>
 
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
-                                    <label for="number">Professional since</label>
-
-                                    <input
-                                        class="form-control form-control-lg daterange"
-                                        type="text"
-                                        name="professional_since"
-                                    />
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="number">Won / Lost</label>
+                                    <label for="result">Result</label>
                                     <input
                                         class="form-control form-control-lg"
                                         type="text"
-                                        name="won_lost"
-                                        placeholder="4/7"
+                                        name="result"
+                                        placeholder="Enter Result"
                                     />
                                 </div>
 
                             </div>
 
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="titles">Titles</label>
-                                    <input
-                                        class="form-control form-control-lg"
-                                        type="text"
-                                        name="titles"
-                                    />
-                                </div>
-
-                            </div>
-
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="earnings">Total Earnings($)</label>
-
-                                    <input
-                                        class="form-control form-control-lg"
-                                        type="number"
-                                        name="earnings"
-                                        placeholder="7800"
-                                    />
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="image">Profile photo</label>
-                                    <input
-                                        type="file"
-                                        name="image"
-                                    />
-                                </div>
-
-                            </div>
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" id="add" class="btn btn-lg btn-primary">Add New
-                                Player
+                            <button type="submit" id="add" class="btn btn-lg btn-primary">
+                                Update
                             </button>
                         </div>
 

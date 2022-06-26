@@ -17,11 +17,11 @@ class MatchFactory extends Factory
         $random = rand(1,10);
         return [
             'player_1' => $random,
-            'player_2' => $random - 1,
+            'player_2' => $random - 1 == 0 ? $random + 2 : $random - 1,
             'year' => $this->faker->year(),
             'tournament' => $this->faker->sentence,
             'rules' => implode(',', $this->faker->words(3)),
-            'round' => $random + rand(1,10),
+            'rounds' => $random + rand(1,10),
             'winner' => $random,
             'result' => $random + rand(1,10)
         ];

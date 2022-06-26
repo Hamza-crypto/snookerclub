@@ -13,9 +13,16 @@ class Player extends Model
         'name',
         'dob',
         'birth_place',
-        'image'
+        'residence',
+        'plays_with',
+        'professional_since',
+        'won_lost',
+        'titles',
+        'earnings',
+        'image',
     ];
     protected $casts = [
         'dob' => 'date',
     ];
+
 }

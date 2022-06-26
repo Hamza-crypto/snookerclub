@@ -40,10 +40,17 @@
             <li class="sidebar-header">
                 Matches
             </li>
+
+            <li class="sidebar-item {{ request()->is('matches') ? 'active' : '' }}">
+                <a class="sidebar-link" href="{{ route('matches.index') }}">
+                    <i class="align-middle" data-feather="users"></i>
+                    <span class="align-middle">All Matches</span>
+                </a>
+            </li>
             @if( $role == 'admin')
 
-                <li class="sidebar-item {{ request()->is('players/create') ? 'active' : '' }}">
-                    <a class="sidebar-link" href="{{ route('admin.players.create') }}">
+                <li class="sidebar-item {{ request()->is('matches/create') ? 'active' : '' }}">
+                    <a class="sidebar-link" href="{{ route('matches.create') }}">
                         <i class="align-middle" data-feather="plus-square"></i>
                         <span class="align-middle">Add New Match</span>
                     </a>

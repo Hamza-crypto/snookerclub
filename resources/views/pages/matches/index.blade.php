@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('Players'))
+@section('title', __('Matches'))
 
 @section('scripts')
     <script>
@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-    <h1 class="h3 mb-3">{{ __('All Players') }}</h1>
+    <h1 class="h3 mb-3">{{ __('All Matches') }}</h1>
 
     @if(session('success'))
         <x-alert type="success">{{ session('success') }}</x-alert>
@@ -38,47 +38,54 @@
                         <thead>
                         <tr>
                             <th>{{ 'ID' }}</th>
-                            <th>{{ 'Name' }}</th>
-                            <th>{{ 'Birthplace' }}</th>
-                            <th>{{ 'Age' }}</th>
-                            <th>{{ 'Won/Lost' }}</th>
+                            <th>{{ 'Tournament' }}</th>
+                            <th>{{ 'Player 1' }}</th>
+                            <th>{{ 'Player 2' }}</th>
+                            <th>{{ 'Year' }}</th>
+                            <th>{{ 'Rules' }}</th>
+                            <th>{{ 'Round' }}</th>
+                            <th>{{ 'Winner' }}</th>
                             <th>{{ 'Created at' }}</th>
                             <th>{{ 'Action' }}</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($players as $player)
+                        @foreach($matches as $match)
                             <tr>
 
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $match->id }}</td>
                                 <td>
-                                    {{ $player->name }}
+                                    {{ $match->tournament }}
                                 </td>
-                                <td>{{  $player->birth_place }}</td>
+                                <td>{{ get_player_name($match->player_1) }} </td>
 
-                                <td data-sort="{{ strtotime($player->dob) }}"
-                                    title="{{ $player->dob->format('Y-m-d') }}">{{ str_replace(' ago', '', $player->dob->diffForHumans())  }}</td>
+                                <td>{{ get_player_name($match->player_2) }}</td>
 
-                                <td>{{  $player->won_lost }}</td>
+                                <td>{{ $match->year->format('Y') }}</td>
 
-                                <td data-sort="{{ strtotime($player->created_at) }}"
-                                    title="{{ $player->created_at }}">{{ $player->created_at->diffForHumans() }}</td>
+                                <td>{{ $match->rules }}</td>
+
+                                <td>{{ $match->rounds }}</td>
+
+                                <td>{{ get_player_name($match->winner) }}</td>
+
+                                <td data-sort="{{ strtotime($match->created_at) }}"
+                                    title="{{ $match->created_at }}">{{ $match->created_at->diffForHumans() }}</td>
                                 <td class="table-action">
 
-{{--                                    <a href="{{ route('admin.players.edit', $player->id) }}" class="btn"--}}
-{{--                                       style="display: inline">--}}
-{{--                                        <i class="fa fa-edit text-info"></i>--}}
-{{--                                    </a>--}}
+                                    <a href="{{ route('matches.edit', $match->id) }}" class="btn"
+                                       style="display: inline">
+                                        <i class="fa fa-edit text-info"></i>
+                                    </a>
 
-
-                                    <form method="post" action="{{ route('admin.players.destroy', $player->id) }}"
-                                          onsubmit="return confirmSubmission(this, 'Are you sure you want to delete player ' + '{{ "$player->name"  }}')"
+                                    <form method="post" action="{{ route('matches.destroy', $match->id) }}"
+                                          onsubmit="return confirmSubmission(this, 'Are you sure?' + '{{ "$match->name"  }}')"
                                           style="display: inline">
                                         @csrf
                                         @method('DELETE')
 
                                         <button class="btn text-danger"
-                                                href="{{ route('admin.players.destroy', $player->id) }}">
+                                                href="{{ route('matches.destroy', $match->id) }}">
                                             <i class="fa fa-trash"></i>
 
                                         </button>

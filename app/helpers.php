@@ -7,3 +7,12 @@ function order_activity($title , $order) {
 
     ]);
 }
+
+function get_player_name($id ) {
+
+    $player = \App\Models\Player::select('name')
+        ->where('id',$id )
+        ->first();
+
+    return $player['name'];
+}

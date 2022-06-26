@@ -3,47 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Models\Match;
+use App\Models\Player;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class MatchController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $matches = Match::latest()->get();
+        return view('pages.matches.index', compact('matches'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $players = Player::latest()->get();
+        return view('pages.matches.add', compact('players'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        // create match
+        Match::create([
+            'player_1' => $request->player_1,
+            'player_2' => $request->player_2,
+            'year' => $request->year,
+            'tournament' => $request->tournament,
+            'rules' => $request->rules,
+            'rounds' => $request->rounds
+        ]);
+
+        Session::flash('success', 'Match successfully added.');
+        return redirect()->route('matches.create');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Match  $match
-     * @return \Illuminate\Http\Response
-     */
     public function show(Match $match)
     {
         //
@@ -57,7 +52,7 @@ class MatchController extends Controller
      */
     public function edit(Match $match)
     {
-        //
+        return view('pages.matches.edit', compact('match'));
     }
 
     /**
@@ -69,7 +64,16 @@ class MatchController extends Controller
      */
     public function update(Request $request, Match $match)
     {
-        //
+        //update match
+        $match->update([
+            'rounds' => $request->rounds,
+            'winner' => $request->winner,
+            'result' => $request->result
+        ]);
+
+        Session::flash('success', 'Successfully updated.');
+        return back();
+
     }
 
     /**
@@ -80,6 +84,9 @@ class MatchController extends Controller
      */
     public function destroy(Match $match)
     {
-        //
+        $match->delete();
+        Session::flash('success', 'Match deleted successfully.');
+        return redirect()->route('matches.index');
     }
+
 }

@@ -4,6 +4,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LocationsController;
+use App\Http\Controllers\MatchController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\PlayerHistory;
 use App\Http\Controllers\ProfileController;
@@ -31,10 +32,10 @@ Route::get('/test', function (){
 Route::get('/', [PlayerHistory::class, 'index'])->name('homepage.index');
 
 
-
 Route::get('/reset', function () {
     DB::table('matches')->truncate();
     DB::table('players')->truncate();
+    \Artisan::call('migrate:refresh');
     \Artisan::call('db:seed');
     \Artisan::call('optimize:clear');
     dd('Database cleared');
@@ -54,6 +55,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::impersonate();
+
+    Route::resource('matches', MatchController::class);
 
     Route::group(
         [

@@ -17,11 +17,11 @@ class CreateMatchesTable extends Migration
             $table->id();
             $table->integer('player_1');
             $table->integer('player_2');
-            $table->integer('year')->nullable();
+            $table->date('year')->nullable();
             $table->text('tournament')->nullable();
             $table->text('rules')->nullable();
-            $table->integer('round')->nullable();
-            $table->integer('winner');
+            $table->integer('rounds')->nullable();
+            $table->integer('winner')->nullable();
             $table->text('result')->nullable();
             $table->timestamps();
         });
