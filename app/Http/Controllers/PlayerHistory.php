@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Tournament;
 use App\Models\Player;
-use Illuminate\Http\Request;
 
 class PlayerHistory extends Controller
 {

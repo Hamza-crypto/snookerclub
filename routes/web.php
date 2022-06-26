@@ -26,7 +26,6 @@ Route::get('/test', function (){
 
 });
 
-Route::get('/', [PlayerHistory::class, 'index'])->name('homepage.index');
 
 
 Route::get('/reset', function () {
@@ -38,6 +37,9 @@ Route::get('/reset', function () {
 
 
 Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/', [PlayerHistory::class, 'index'])->name('homepage.index');
+
 
     Route::group([
         'prefix' => 'profile',
