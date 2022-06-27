@@ -62,7 +62,7 @@ Route::group(['middleware' => ['auth']], function () {
             'as' => 'admin.'
         ], function () {
 
-        Route::resource('admin/players', PlayerController::class);
+        Route::resource('players', PlayerController::class);
         Route::resource('users', UsersController::class);
         Route::post('password/{user}', [UsersController::class, 'password_update'])->name('user.password_update');
 

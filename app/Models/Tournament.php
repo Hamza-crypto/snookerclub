@@ -17,7 +17,8 @@ class Tournament extends Model
         'rules',
         'round',
         'winner',
-        'result'
+        'result',
+        'type'
     ];
 
     protected $casts = [

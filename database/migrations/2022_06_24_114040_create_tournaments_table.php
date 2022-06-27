@@ -23,6 +23,7 @@ class CreateTournamentsTable extends Migration
             $table->integer('rounds')->nullable();
             $table->integer('winner')->nullable();
             $table->text('result')->nullable();
+            $table->text('type')->nullable();
             $table->timestamps();
         });
     }

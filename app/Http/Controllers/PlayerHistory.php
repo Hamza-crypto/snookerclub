@@ -16,7 +16,6 @@ class PlayerHistory extends Controller
         if(!(isset($data['player1']) && $data['player1'] != -100 && isset($data['player2']) && $data['player2'] != -100)){ // if player1 is set, then we are looking for a match
             $player1 = null;
             $player2 = null;
-
         }
         else{
 
@@ -27,6 +26,7 @@ class PlayerHistory extends Controller
 
             $matches = Tournament::WhereIn('player_1',[$player1->id, $player2->id] )
                 ->WhereIn('player_2',[$player1->id, $player2->id] )
+                ->Where('type', $data['type'] )
                 ->get();
 
             if(count($matches) > 0 ){

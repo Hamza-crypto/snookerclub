@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Player;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -25,7 +24,6 @@ class PlayerController extends Controller
 
     public function store(Request $request)
     {
-        // upload photo
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = $file->getClientOriginalName();

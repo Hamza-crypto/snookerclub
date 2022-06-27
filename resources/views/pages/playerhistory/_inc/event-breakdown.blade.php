@@ -1,16 +1,14 @@
 <div class="row">
-    <div class="col-1"></div>
-    <div class="col-10">
+
+    <div class="col-sm-12">
         <h1 class="h3 mb-3"> Event Breakdown</h1>
         <div class="card">
             <div class="card-body">
                 <div class="dt-buttons btn-group flex-wrap">
-
-
-                    <table id="users-table" class="table table-striped" style="width:100%">
+                    <table id="users-table" class="table table-striped table-responsive-sm" style="width:100%">
                         <thead>
                         <tr>
-                            <th>{{ 'ID' }}</th>
+{{--                            <th>{{ 'ID' }}</th>--}}
                             <th>{{ 'Year' }}</th>
                             <th>{{ 'Event' }}</th>
                             <th>{{ 'Rules' }}</th>
@@ -24,7 +22,7 @@
                             @foreach($matches as $match)
 
                                 <tr>
-                                    <td>{{ $match->id }}</td>
+{{--                                    <td>{{ $match->id }} </td>--}}
                                     <td>{{ $match->year }} </td>
                                     <td>{{ $match->tournament }}</td>
                                     <td>{{ $match->rules }}</td>
@@ -51,5 +49,5 @@
             </div>
         </div>
     </div>
-    <div class="col-1"></div>
+
 </div>

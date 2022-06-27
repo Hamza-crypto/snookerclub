@@ -62,22 +62,22 @@
                 <li class="sidebar-header">
                     Manage
                 </li>
-                <li class="sidebar-item {{ request()->is('users*') ? 'active' : '' }} ">
-                    <a data-target="#users" data-toggle="collapse" class="sidebar-link {{ request()->is('users/*') ? 'collapsed' : '' }}">
+                <li class="sidebar-item {{ request()->is('admin/users*') ? 'active' : '' }} ">
+                    <a data-target="#users" data-toggle="collapse" class="sidebar-link {{ request()->is('admin/users/*') ? 'collapsed' : '' }}">
                         <i class="align-middle" data-feather="users"></i>
                         <span class="align-middle">Users</span>
                     </a>
                     <ul id="users"
-                        class="sidebar-dropdown list-unstyled collapse {{ request()->is('users*') ? 'show' : '' }}"
+                        class="sidebar-dropdown list-unstyled collapse {{ request()->is('admin/users*') ? 'show' : '' }}"
                         data-parent="#sidebar">
 
-                        <li class="sidebar-item {{ request()->is('users') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('admin/users') ? 'active' : '' }}">
                             <a class="sidebar-link" href="{{ route('admin.users.index') }}">
                                 <i class="align-middle" data-feather="users"></i>
                                 <span class="align-middle">All Users</span>
                             </a>
                         </li>
-                        <li class="sidebar-item {{ request()->is('users/create') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->is('admin/users/create') ? 'active' : '' }}">
                             <a class="sidebar-link" href="{{ route('admin.users.create') }}">
                                 <i class="align-middle" data-feather="user-plus"></i>
                                 <span class="align-middle">Add New User</span>

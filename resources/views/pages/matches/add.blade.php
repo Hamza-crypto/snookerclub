@@ -132,6 +132,22 @@
                             </div>
 
                         </div>
+
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label class="form-label" for="type"> Select type </label>
+                                    <select name="type" id="type"
+                                            class="form-control form-select custom-select select2"
+                                            data-toggle="select2">
+                                            <option value="snooker" selected> Snooker </option>
+                                            <option value="8-pool"> 8-Pool </option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
                         <div class="form-group">
                             <button type="submit" id="add" class="btn btn-lg btn-primary">Add New
                                 Match

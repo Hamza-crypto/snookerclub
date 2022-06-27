@@ -1,9 +1,9 @@
 <div class="row">
-    <div class="col-1"></div>
-    <div class="col-10">
+{{--    <div class="col-1"></div>--}}
+    <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-                <table class="table table-striped dataTable" style="width: 100%;">
+                <table class="table table-striped dataTable table-responsive-sm" style="width: 100%;">
                     <tbody>
                     <tr class="odd">
                         <th> {{ date('Y') - $player1->dob->format('Y') }} ( {{ $player1->dob->format('Y-m-d') }})
@@ -60,5 +60,5 @@
             </div>
         </div>
     </div>
-    <div class="col-1"></div>
+{{--    <div class="col-1"></div>--}}
 </div>

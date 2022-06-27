@@ -32,36 +32,19 @@ class TournamentController extends Controller
             'year' => $request->year,
             'tournament' => $request->tournament,
             'rules' => $request->rules,
-            'rounds' => $request->rounds
+            'rounds' => $request->rounds,
+            'type' => $request->type
         ]);
 
         Session::flash('success', 'Tournament successfully added.');
         return redirect()->route('matches.create');
     }
 
-    public function show(Tournament $match)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Tournament  $match
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Tournament $match)
     {
         return view('pages.matches.edit', compact('match'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tournament  $match
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Tournament $match)
     {
         //update match
@@ -76,12 +59,6 @@ class TournamentController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Tournament  $match
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Tournament $match)
     {
         $match->delete();
