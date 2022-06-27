@@ -28,10 +28,12 @@ Route::get('/reset', function () {
     dd('Database cleared');
 });
 
-Route::redirect('/', 'home');
-Route::get('home', [PlayerHistory::class, 'index'])->name('homepage.index');
+Route::redirect('/', '/home');
 
 Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('home', [PlayerHistory::class, 'index'])->name('homepage.index');
+    Route::get('results', [TournamentController::class, 'results'])->name('tournament.results');
 
     Route::group([
         'prefix' => 'profile',

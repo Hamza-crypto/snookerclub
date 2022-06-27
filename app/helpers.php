@@ -14,5 +14,11 @@ function get_player_name($id ) {
         ->where('id',$id )
         ->first();
 
-    return $player['name'];
+    try {
+        return $player['name'];
+    }
+    catch (\Exception $e) {
+        return "---";
+    }
+
 }

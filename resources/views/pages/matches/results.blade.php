@@ -2,18 +2,19 @@
 
 @section('title', __('Matches'))
 
+@php
+$role = \Auth::user()->role;
+@endphp
 @section('scripts')
     <script>
         $(document).ready(function () {
-            $('#matches-table').DataTable({
-                order: [[8, 'desc']],
-            });
+            $('#users-table').DataTable();
         });
     </script>
 @endsection
 
 @section('content')
-    <h1 class="h3 mb-3">{{ __('All Matches') }}</h1>
+    <h1 class="h3 mb-3">{{ __('Today Tournaments') }}</h1>
 
     @if(session('success'))
         <x-alert type="success">{{ session('success') }}</x-alert>
@@ -36,26 +37,27 @@
                     @endif
 
 
-                    <table id="matches-table" class="table table-striped" style="width:100%">
+                    <table id="users-table" class="table table-striped" style="width:100%">
                         <thead>
                         <tr>
-                            <th>{{ 'ID' }}</th>
                             <th>{{ 'Tournament' }}</th>
                             <th>{{ 'Player 1' }}</th>
                             <th>{{ 'Player 2' }}</th>
-                            <th>{{ 'Year' }}</th>
+                            <th>{{ 'Day' }}</th>
                             <th>{{ 'Rules' }}</th>
                             <th>{{ 'Round' }}</th>
                             <th>{{ 'Winner' }}</th>
+                            <th>{{ 'Result' }}</th>
                             <th>{{ 'Created at' }}</th>
-                            <th>{{ 'Action' }}</th>
+                            @if(in_array($role, ['admin', 'moderator']))
+                                <th>{{ 'Action' }}</th>
+                            @endif
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($matches as $match)
                             <tr>
 
-                                <td>{{ $match->id }}</td>
                                 <td>
                                     {{ $match->tournament }}
                                 </td>
@@ -63,7 +65,7 @@
 
                                 <td>{{ get_player_name($match->player_2) }}</td>
 
-                                <td>{{ $match->year->format('Y') }}</td>
+                                <td>{{ $match->year->format('Y-m-d') }}</td>
 
                                 <td>{{ $match->rules }}</td>
 
@@ -71,28 +73,21 @@
 
                                 <td>{{ get_player_name($match->winner) }}</td>
 
+                                <td>{{ $match->result }}</td>
+
                                 <td data-sort="{{ strtotime($match->created_at) }}"
                                     title="{{ $match->created_at }}">{{ $match->created_at->diffForHumans() }}</td>
-                                <td class="table-action">
+
+                                @if(in_array($role, ['admin', 'moderator']))
+                                    <td class="table-action">
 
                                     <a href="{{ route('matches.edit', $match->id) }}" class="btn"
                                        style="display: inline">
                                         <i class="fa fa-edit text-info"></i>
                                     </a>
 
-                                    <form method="post" action="{{ route('matches.destroy', $match->id) }}"
-                                          onsubmit="return confirmSubmission(this, 'Are you sure?' + '{{ "$match->name"  }}')"
-                                          style="display: inline">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button class="btn text-danger"
-                                                href="{{ route('matches.destroy', $match->id) }}">
-                                            <i class="fa fa-trash"></i>
-
-                                        </button>
-                                    </form>
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>

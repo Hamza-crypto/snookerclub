@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tournament;
 use App\Models\Player;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class TournamentController extends Controller
@@ -64,6 +65,15 @@ class TournamentController extends Controller
         $match->delete();
         Session::flash('success', 'Tournament deleted successfully.');
         return redirect()->route('matches.index');
+    }
+
+    public function results()
+    {
+        $matches = Tournament::latest()
+            ->whereDate('year', Carbon::today())
+            ->get();
+
+        return view('pages.matches.results', compact('matches'));
     }
 
 }
