@@ -21,13 +21,6 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-
-Route::get('/test', function (){
-
-});
-
-
-
 Route::get('/reset', function () {
     \Artisan::call('migrate:fresh');
     \Artisan::call('db:seed');
@@ -35,8 +28,8 @@ Route::get('/reset', function () {
     dd('Database cleared');
 });
 
-Route::redirect('/', '/home');
-Route::get('/home', [PlayerHistory::class, 'index'])->name('homepage.index');
+Route::redirect('/', 'home');
+Route::get('home', [PlayerHistory::class, 'index'])->name('homepage.index');
 
 Route::group(['middleware' => ['auth']], function () {
 
