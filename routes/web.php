@@ -36,11 +36,9 @@ Route::get('/reset', function () {
 });
 
 Route::redirect('/', '/login');
+Route::get('/', [PlayerHistory::class, 'index'])->name('homepage.index');
 
 Route::group(['middleware' => ['auth']], function () {
-
-    Route::get('/', [PlayerHistory::class, 'index'])->name('homepage.index');
-
 
     Route::group([
         'prefix' => 'profile',

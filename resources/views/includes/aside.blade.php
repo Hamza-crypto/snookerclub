@@ -3,7 +3,7 @@
 @endphp
 <nav id="sidebar" class="sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="{{ route('dashboard.index') }}">
+        <a class="sidebar-brand" href="{{ env("APP_URL") }}">
             <span class="align-middle me-3">{{ env("APP_NAME") }}</span>
         </a>
 

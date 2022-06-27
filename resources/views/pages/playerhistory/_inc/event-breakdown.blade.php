@@ -23,7 +23,7 @@
 
                                 <tr>
 {{--                                    <td>{{ $match->id }} </td>--}}
-                                    <td>{{ $match->year }} </td>
+                                    <td>{{ $match->year->format('Y-m-d') }} </td>
                                     <td>{{ $match->tournament }}</td>
                                     <td>{{ $match->rules }}</td>
                                     <td>{{ $match->round }}</td>

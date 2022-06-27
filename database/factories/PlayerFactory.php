@@ -20,7 +20,7 @@ class PlayerFactory extends Factory
             'plays_with' => ['Right-handed', 'Left-handed'][rand(0, 1)],
             'professional_since' => $this->faker->year(),
             'won_lost' => $this->faker->numberBetween(1, 10) . '/' . $this->faker->numberBetween(1, 10),
-            'titles' =>  implode(',', $this->faker->words(3)) ,
+            'titles' =>  $this->faker->word,
             'earnings' => $this->faker->numberBetween(5000, 10000),
             'image' => $this->faker->imageUrl(),
         ];

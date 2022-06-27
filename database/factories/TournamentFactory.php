@@ -20,9 +20,9 @@ class TournamentFactory extends Factory
         return [
             'player_1' => $player_1,
             'player_2' => $player_2,
-            'year' => $this->faker->year(),
+            'year' => $this->faker->dateTimeBetween('-5 years', 'now'),
             'tournament' => $this->faker->sentence,
-            'rules' => implode(',', $this->faker->words(3)),
+            'rules' => $this->faker->word,
             'rounds' => $random + rand(1,10),
             'winner' => [$player_1, $player_2][rand(0,1)],
             'result' => $random + rand(1,10),
