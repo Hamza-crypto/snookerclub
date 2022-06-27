@@ -35,7 +35,7 @@ Route::get('/reset', function () {
     dd('Database cleared');
 });
 
-Route::redirect('/', '/login');
+Route::redirect('/', '/');
 Route::get('/', [PlayerHistory::class, 'index'])->name('homepage.index');
 
 Route::group(['middleware' => ['auth']], function () {
