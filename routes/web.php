@@ -35,6 +35,7 @@ Route::get('/reset', function () {
     dd('Database cleared');
 });
 
+Route::redirect('/', '/login');
 
 Route::group(['middleware' => ['auth']], function () {
 
