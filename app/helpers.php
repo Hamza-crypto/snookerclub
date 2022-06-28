@@ -22,3 +22,11 @@ function get_player_name($id ) {
     }
 
 }
+
+function get_img_url($key) {
+    //check if key contains http
+    if (strpos($key, 'https') !== false) {
+        return $key;
+    }
+    return \Storage::disk('s3')->url($key);
+}

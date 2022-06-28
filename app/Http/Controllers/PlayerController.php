@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Player;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class PlayerController extends Controller
 {
@@ -25,9 +26,8 @@ class PlayerController extends Controller
     public function store(Request $request)
     {
         if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $fileName = $file->getClientOriginalName();
-            $file->move(public_path('players'), $fileName);
+            $path = Storage::disk('s3')->put('players', $request->image, 'public');
+            $fileName = $path;
         } else {
             $fileName = null;
         }

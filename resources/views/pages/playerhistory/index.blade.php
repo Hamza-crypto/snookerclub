@@ -84,7 +84,7 @@
     @include('pages.playerhistory._inc.filters')
 
     @if(isset($_REQUEST['filter']) && $_REQUEST['player1'] != -100 && $_REQUEST['player2'] != -100)
-        @include('pages.playerhistory._inc.cards')
+        @include('pages.playerhistory._inc.cards_photo')
         @include('pages.playerhistory._inc.comparison')
         @include('pages.playerhistory._inc.event-breakdown')
     @endif
