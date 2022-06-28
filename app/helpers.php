@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
+
 function order_activity($title , $order) {
     $order->activities()->create([
         "order_id" => $order->id,
@@ -23,10 +25,13 @@ function get_player_name($id ) {
 
 }
 
-function get_img_url($key) {
+function get_img_url($key)
+{
     //check if key contains http
     if (strpos($key, 'https') !== false) {
         return $key;
+    } else {
+        return Storage::disk('s3')->url($key);
     }
-    return \Storage::disk('s3')->url($key);
+
 }
