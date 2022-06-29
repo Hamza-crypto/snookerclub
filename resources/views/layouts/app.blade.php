@@ -26,15 +26,13 @@
 
         @auth
             @include('includes.header')
+        @else
+            @include('includes.header-front')
         @endauth
 
-        @guest
-            @include('includes.header-guest')
-        @endguest
 
         <main class="content">
             <div class="container-fluid p-0">
-
                 @yield('content')
             </div>
         </main>

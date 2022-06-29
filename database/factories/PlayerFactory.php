@@ -19,6 +19,7 @@ class PlayerFactory extends Factory
             'residence' => $this->faker->country,
             'plays_with' => ['Right-handed', 'Left-handed'][rand(0, 1)],
             'professional_since' => $this->faker->year(),
+            'highest_break' => rand(5, 10),
             'won_lost' => $this->faker->numberBetween(1, 10) . '/' . $this->faker->numberBetween(1, 10),
             'titles' =>  $this->faker->word,
             'earnings' => $this->faker->numberBetween(5000, 10000),

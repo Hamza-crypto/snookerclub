@@ -30,7 +30,7 @@ function get_img_url($key)
     if (str_contains($key, 'https')) {
         return $key;
     } else {
-        return Storage::disk('s3')->url($key);
+        return "/players/" . $key;
     }
 
 }

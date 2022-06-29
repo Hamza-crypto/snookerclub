@@ -2,9 +2,6 @@
 
 @section('title', __('Matches'))
 
-@php
-$role = \Auth::user()->role;
-@endphp
 @section('scripts')
     <script>
         $(document).ready(function () {
@@ -49,9 +46,9 @@ $role = \Auth::user()->role;
                             <th>{{ 'Winner' }}</th>
                             <th>{{ 'Result' }}</th>
                             <th>{{ 'Created at' }}</th>
-                            @if(in_array($role, ['admin', 'moderator']))
+                            @auth
                                 <th>{{ 'Action' }}</th>
-                            @endif
+                            @endauth
                         </tr>
                         </thead>
                         <tbody>
@@ -78,7 +75,7 @@ $role = \Auth::user()->role;
                                 <td data-sort="{{ strtotime($match->created_at) }}"
                                     title="{{ $match->created_at }}">{{ $match->created_at->diffForHumans() }}</td>
 
-                                @if(in_array($role, ['admin', 'moderator']))
+                                @auth
                                     <td class="table-action">
 
                                     <a href="{{ route('matches.edit', $match->id) }}" class="btn"
@@ -87,7 +84,7 @@ $role = \Auth::user()->role;
                                     </a>
 
                                 </td>
-                                @endif
+                                @endauth
                             </tr>
                         @endforeach
                         </tbody>

@@ -21,19 +21,12 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/reset', function () {
-    \Artisan::call('migrate:fresh');
-    \Artisan::call('db:seed');
-    \Artisan::call('optimize:clear');
-    dd('Database cleared');
-});
 
-Route::redirect('/', '/home');
+
+Route::get('/', [PlayerHistory::class, 'index'])->name('homepage.index');
+Route::get('results', [TournamentController::class, 'results'])->name('tournament.results');
 
 Route::group(['middleware' => ['auth']], function () {
-
-    Route::get('home', [PlayerHistory::class, 'index'])->name('homepage.index');
-    Route::get('results', [TournamentController::class, 'results'])->name('tournament.results');
 
     Route::group([
         'prefix' => 'profile',
@@ -59,6 +52,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('players', PlayerController::class);
         Route::resource('users', UsersController::class);
         Route::post('password/{user}', [UsersController::class, 'password_update'])->name('user.password_update');
+
+        Route::get('/reset', function () {
+            \Artisan::call('migrate:fresh');
+            \Artisan::call('db:seed');
+            \Artisan::call('optimize:clear');
+            dd('Database cleared');
+        });
 
     });
 

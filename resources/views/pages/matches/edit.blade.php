@@ -142,7 +142,8 @@ $player2 = get_player_name($match->player_2 );
                                 <div class="form-group">
                                     <label for="winner">Winner</label>
                                     <select name="winner" id="winner"
-                                            class="form-control form-select">
+                                            class="form-control form-select custom-select select2"
+                                            data-toggle="select2">
                                         <option value="-100" selected> Select Winner</option>
                                         <option value="{{ $match->player_1 }}"> {{ $player1 }}</option>
                                         <option value="{{ $match->player_2 }}"> {{ $player2 }}</option>

@@ -2,13 +2,9 @@
 
 @section('title', 'Players')
 
-@php
-
-@endphp
-
 @section('scripts')
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             // Pie chart
             //read php variables in javascript
             var app = <?php echo json_encode($graph_data); ?>;
@@ -31,7 +27,7 @@
                 options: {
                     responsive: !window.MSInputMethodContext,
                     maintainAspectRatio: false,
-                    cutoutPercentage:30,
+                    cutoutPercentage: 30,
                     legend: {
                         display: true,
                         reverse: true,
@@ -89,6 +85,9 @@
         @include('pages.playerhistory._inc.event-breakdown')
     @endif
 
+    @guest
+        @include('pages.playerhistory._inc.sponsored')
+    @endguest
 
 
 

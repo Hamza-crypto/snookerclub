@@ -41,8 +41,8 @@
                                 <select name="type" id="type"
                                         class="form-control form-select custom-select select2"
                                         data-toggle="select2">
-                                    <option value="snooker" selected> Snooker </option>
-                                    <option value="8-pool"> 8-Pool </option>
+                                    <option value="snooker" selected> Snooker</option>
+                                    <option value="8-pool" {{ request()->type == '8-pool' ? 'selected' : '' }}> 8-Pool </option>
                                 </select>
                             </div>
                         </div>

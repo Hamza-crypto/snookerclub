@@ -26,10 +26,12 @@ class PlayerController extends Controller
     public function store(Request $request)
     {
         if ($request->hasFile('image')) {
-            $path = Storage::disk('s3')->put('players', $request->image, 'public');
-            $fileName = $path;
+            $image = $request->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('players'), $image_name);
+//            $path = Storage::disk('s3')->put('players', $request->image, 'public');
         } else {
-            $fileName = null;
+            $image_name = null;
         }
 
 
@@ -45,7 +47,7 @@ class PlayerController extends Controller
             'won_lost' => $request->won_lost,
             'titles' => $request->titles,
             'earnings' => $request->earnings,
-            'image' => $fileName,
+            'image' => $image_name,
         ]);
 
         Session::flash('success', 'Player successfully added.');

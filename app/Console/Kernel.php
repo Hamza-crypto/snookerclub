@@ -13,7 +13,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\ChangeStatus::class,
     ];
 
     /**
@@ -25,11 +24,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         //$schedule->command('inspire')->everyMinute();
-        $schedule->command('update:order_status')
-            ->everyMinute();
 
-        $schedule->command('test:status')
-            ->everyMinute();
 
        // $schedule->command('telescope:prune --hours=720')->daily();
     }
