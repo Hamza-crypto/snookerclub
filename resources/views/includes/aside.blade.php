@@ -21,7 +21,7 @@
             <li class="sidebar-header">
                 Players
             </li>
-            <li class="sidebar-item {{ request()->is('players') ? 'active' : '' }}">
+            <li class="sidebar-item {{ request()->is('admin/players') ? 'active' : '' }}">
                 <a class="sidebar-link" href="{{ route('admin.players.index') }}">
                     <i class="align-middle" data-feather="users"></i>
                     <span class="align-middle">All Players</span>
@@ -29,7 +29,7 @@
             </li>
             @if( $role == 'admin')
 
-                <li class="sidebar-item {{ request()->is('players/create') ? 'active' : '' }}">
+                <li class="sidebar-item {{ request()->is('admin/players/create') ? 'active' : '' }}">
                     <a class="sidebar-link" href="{{ route('admin.players.create') }}">
                         <i class="align-middle" data-feather="plus-square"></i>
                         <span class="align-middle">Add New Player</span>
