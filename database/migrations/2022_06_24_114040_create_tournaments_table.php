@@ -20,7 +20,7 @@ class CreateTournamentsTable extends Migration
             $table->date('year')->nullable();
             $table->text('tournament')->nullable();
             $table->text('rules')->nullable();
-            $table->integer('rounds')->nullable();
+            $table->text('round')->nullable();
             $table->integer('winner')->nullable();
             $table->text('result')->nullable();
             $table->text('type')->nullable();

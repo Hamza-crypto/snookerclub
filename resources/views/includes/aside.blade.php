@@ -18,16 +18,18 @@
                 </a>
             </li>
 
-            <li class="sidebar-header">
-                Players
-            </li>
-            <li class="sidebar-item {{ request()->is('admin/players') ? 'active' : '' }}">
-                <a class="sidebar-link" href="{{ route('admin.players.index') }}">
-                    <i class="align-middle" data-feather="users"></i>
-                    <span class="align-middle">All Players</span>
-                </a>
-            </li>
+
             @if( $role == 'admin')
+
+                <li class="sidebar-header">
+                    Players
+                </li>
+                <li class="sidebar-item {{ request()->is('admin/players') ? 'active' : '' }}">
+                    <a class="sidebar-link" href="{{ route('admin.players.index') }}">
+                        <i class="align-middle" data-feather="users"></i>
+                        <span class="align-middle">All Players</span>
+                    </a>
+                </li>
 
                 <li class="sidebar-item {{ request()->is('admin/players/create') ? 'active' : '' }}">
                     <a class="sidebar-link" href="{{ route('admin.players.create') }}">

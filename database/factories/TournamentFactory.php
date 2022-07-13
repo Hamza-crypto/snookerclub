@@ -23,7 +23,7 @@ class TournamentFactory extends Factory
             'year' => $this->faker->dateTimeBetween('-5 years', 'now'),
             'tournament' => $this->faker->sentence,
             'rules' => $this->faker->word,
-            'rounds' => $random + rand(1,10),
+            'round' => $random + rand(1,10),
             'winner' => [$player_1, $player_2][rand(0,1)],
             'result' => $random + rand(1,10),
             'type' => ['8-pool', 'snooker'][rand(0,1)]

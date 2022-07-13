@@ -124,7 +124,7 @@
                                     <input
                                         class="form-control form-control-lg"
                                         type="text"
-                                        name="rounds"
+                                        name="round"
                                         placeholder="Enter rounds"
                                     />
                                 </div>

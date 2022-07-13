@@ -173,12 +173,23 @@
                         </div>
 
                         <div class="row mt-3">
-                            <div class="col-12">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="image">Profile photo</label>
                                     <input
                                         type="file"
-                                        name="image"
+                                        name="image2"
+                                    />
+                                </div>
+
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="image">Passport size photo</label>
+                                    <input
+                                        type="file"
+                                        name="image2"
                                     />
                                 </div>
 

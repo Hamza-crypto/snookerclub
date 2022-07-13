@@ -23,7 +23,8 @@ class PlayerFactory extends Factory
             'won_lost' => $this->faker->numberBetween(1, 10) . '/' . $this->faker->numberBetween(1, 10),
             'titles' =>  $this->faker->word,
             'earnings' => $this->faker->numberBetween(5000, 10000),
-            'image' => $this->faker->imageUrl(),
+            'image1' => $this->faker->imageUrl(),
+            'image2' => $this->faker->imageUrl(),
         ];
     }
 

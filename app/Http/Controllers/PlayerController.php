@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Player;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 
 class PlayerController extends Controller
 {
@@ -25,13 +24,20 @@ class PlayerController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $image_name = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('players'), $image_name);
-//            $path = Storage::disk('s3')->put('players', $request->image, 'public');
+        if ($request->hasFile('image1')) {
+            $image1 = $request->file('image1');
+            $image_1_name = time() . '.' . $image1->getClientOriginalExtension();
+            $image1->move(public_path('players'), $image_1_name);
         } else {
-            $image_name = null;
+            $image_1_name = null;
+        }
+
+        if ($request->hasFile('image2')) {
+            $image2 = $request->file('image2');
+            $image_2_name = time() . '.' . $image2->getClientOriginalExtension();
+            $image2->move(public_path('players'), $image_2_name);
+        } else {
+            $image_2_name = null;
         }
 
 
@@ -47,7 +53,8 @@ class PlayerController extends Controller
             'won_lost' => $request->won_lost,
             'titles' => $request->titles,
             'earnings' => $request->earnings,
-            'image' => $image_name,
+            'image1' => $image_1_name,
+            'image2' => $image_2_name,
         ]);
 
         Session::flash('success', 'Player successfully added.');

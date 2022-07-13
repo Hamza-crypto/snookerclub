@@ -19,7 +19,8 @@ class Player extends Model
         'won_lost',
         'titles',
         'earnings',
-        'image',
+        'image1',
+        'image2',
     ];
     protected $casts = [
         'dob' => 'date',

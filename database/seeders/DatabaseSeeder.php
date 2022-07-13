@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Player;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -27,6 +28,15 @@ class DatabaseSeeder extends Seeder
        \App\Models\User::factory(5)->create();
        \App\Models\Player::factory(10)->create();
        \App\Models\Tournament::factory(50)->create();
+
+
+        $user1 = Player::find(1);
+        $user1->highlighted = 1;
+        $user1->save();
+
+        $user1 = Player::find(2);
+        $user1->highlighted = 1;
+        $user1->save();
 
 
     }

@@ -16,6 +16,7 @@ class CreatePlayersTable extends Migration
         Schema::create('players', function (Blueprint $table) {
             $table->id();
             $table->text('name');
+            $table->integer('highlighted')->default(0);
             $table->date('dob');
             $table->text('birth_place');
             $table->text('residence')->nullable();
@@ -25,7 +26,8 @@ class CreatePlayersTable extends Migration
             $table->text('won_lost')->nullable();
             $table->text('titles')->nullable();
             $table->integer('earnings')->nullable();
-            $table->text('image')->nullable();
+            $table->text('image1')->nullable();
+            $table->text('image2')->nullable();
             $table->timestamps();
         });
     }
