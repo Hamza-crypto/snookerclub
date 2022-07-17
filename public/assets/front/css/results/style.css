@@ -1,0 +1,558 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;600;800&display=swap');
+
+body {
+    background-color: #141414;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 83%;
+}
+
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 80px;
+    margin: 0.5vw 0 0.5vw 0;
+    background: none;
+    border: none;
+    color: #fff;
+
+}
+select:hover, #left:hover, #right:hover{
+    background-color: #454545 !important;
+}
+select option{
+    text-align: center;
+}
+select option{
+    align-items: center;
+    align-self: stretch;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    font-size: 12px;
+    font-weight: 400;
+    justify-content: center;
+    justify-self: stretch;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+}
+.main-sec{
+    justify-content: center;
+    display: flex;
+}
+/* .table{
+    width: 111%;
+    max-width: 111%;
+} */
+label{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 10px 0 !important;
+}
+.sec-2-button1{
+    margin-bottom: 2.5vw;
+    width: 43%;
+    margin-right: 0;
+    margin-left: 0;
+    border: none;
+    background-color: #060C1B;
+    color: #ffffff;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
+    font-weight: 600;
+    font-size: 2vw;
+}
+.sec-2-button2{
+    margin-bottom: 2.5vw;
+    width: 43%;
+    margin-right: 0;
+    margin-left: 0;
+    border: none;
+    background-color: #060C1B;
+    color: #ffffff;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
+    font-weight: 600;
+    font-size: 2vw;
+}
+input[name="gameType"]{
+    cursor: pointer;
+}
+input[name="gameType"]:checked + label{
+    background-color: #CE132D;
+}
+
+.sec-2-div{
+    color: #ffffff;
+    font-size: 2.3vw;
+    text-align: center;
+    justify-content: baseline;
+    align-items: center;
+    padding-top: 10vw;
+    padding-bottom: 10vw;
+    margin-left: 0.4vw;
+    margin-right: 0.4vw;
+}
+
+@media only screen and (max-width: 480px){
+    .sec-2-div{
+        font-size: 3.3vw;
+    }
+}
+
+
+
+.sec-2-button-div{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+}
+.sec-2-button-div input{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    opacity: 0;
+}
+.drawbutton{
+    border: none;
+    text-decoration: underline;
+    background-color: none;
+    margin-top: 0.5rem;
+}
+.tournamentname{
+    width: 46%;
+}
+
+.tou-nam {
+    display: block;
+    width: 100%;
+}
+table.data {
+    border-top: 5px solid #ce132d;
+    margin-bottom: 40px;
+}
+.content-area-button{
+    color: #ffffff;
+    text-align: right;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+}
+
+.daterdiv{
+    display: flex;
+    justify-content: right;
+    font-size: 0.8rem;
+}
+
+/* @media only screen and (max-width: 768px){
+    table.data{
+        width: 111%;
+        border: none;
+    }
+} */
+
+
+#navbarDropdownMenuLink img{
+    width: 1vw;
+    vertical-align: auto;
+}
+#bgdark{
+    background-color: #000000;
+    opacity: 100%;
+    color: #ffffff;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+#ddnav{
+    justify-content: right;
+    flex-grow: 1;
+}
+.navbar-nav{
+    justify-content: center;
+    flex-grow: 200;
+    padding: 10px;
+}
+#navbarNavDropdown li{
+    font-size: 17px;
+    font-weight: 600;
+    padding: 0 15px 0px 15px;
+}
+.navbar-brand{
+    font-size: 17px;
+    font-weight: 600;
+}
+#navitem{
+    color: #ffffff;
+}
+#navitem:hover{
+    opacity: 80%;
+}
+
+@media only screen and (max-width: 991px){
+    .navbar-dark .navbar-nav .nav-link{
+        font-size:12px;
+    }
+    #navbarNavDropdown li {
+        padding: 0 0px 0px 0px;
+    }
+}
+
+#footer{
+    background-color: #1A1F2B;
+}
+#footer a{
+    color: #ffffff;
+    font-weight: 600;
+}
+#footerlogo{
+    font-size: 20px;
+    padding: 1vw;
+}
+.footernav{
+    font-size: 16px;
+}
+.copyright{
+    text-align: center;
+    font-size: 9PX;
+    font-weight: 600;
+    background-color: #1A1F2B;
+    color: #ffffff;
+}
+
+@media only screen and (max-width: 480px){
+    .sponsorimg{
+        display: inline-grid;
+    }
+    .sponsorimg img{
+        width: 70vw;
+    }
+    .sponsored h1{
+        font-size: 3.5vw;
+    }
+    .table2 td{
+        font-size: 1.4vw;
+    }
+    .table1{
+        transform: translateY(-3.5vw);
+    }
+    .eventbreakdown h1 {
+        font-size: 3vw;
+    }
+}
+.quotewriter{
+    text-align: right;
+    padding: 1vw 5vw;
+}
+@media only screen and (min-width: 480px){
+    .quotewriter{
+        padding-right: 10vw;
+    }
+}
+
+.tablediv{
+    display: flex;
+    justify-content: center;
+}
+#round1{
+    width: 60%!important;
+}
+@media only screen and (max-width: 780px){
+    #round1{
+        width: 100%!important;
+    }
+}
+
+table.matches-round tbody tr:not(.extender).odd td:first-child {
+    background: none repeat scroll 0 0 #e21a4c !important;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+table.matches-round tbody tr:not(.extender).even td:first-child {
+    background: none repeat scroll 0 0 #ce132d !important;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+table.data tbody tr:not(.extender):nth-child(odd) td {
+    background-color: #e7e7e7;
+}
+
+table.matches-round tbody tr td:nth-child(2) {
+    text-align: right;
+    padding-top: 1.2em;
+}
+table.matches-round tbody tr.odd td {
+    background-color: #e7e7e7 !important;
+}
+table.data tbody tr:first-child td {
+    padding-top: 20px;
+}
+table.matches-round tbody tr td {
+    vertical-align: top;
+}
+@media (max-width: 1200px){
+    table.data tbody tr td {
+        font-size: 0.9em;
+    }
+}
+table.data tbody tr td {
+    color: #000;
+    text-align: center;
+    padding: 10px 0;
+    border: none;
+    vertical-align: middle;
+}
+table.data tbody tr:not(.extender):nth-child(even) td {
+    background-color: #d6d6d6;
+}
+
+table.matches-round tbody tr td:nth-child(2) {
+    text-align: right;
+    padding-top: 1.2em;
+}
+table.matches-round tbody tr.even td {
+    background-color: #d6d6d6 !important;
+}
+table.matches-round tbody tr td {
+    vertical-align: top;
+}
+@media (max-width: 1200px){
+    table.data tbody tr td {
+        font-size: 0.9em;
+    }
+}
+table.data tbody tr td {
+    color: #000;
+    text-align: center;
+    padding: 10px 0;
+    border: none;
+    vertical-align: middle;
+}
+
+
+.table>caption+thead>tr:first-child>th, .table>colgroup+thead>tr:first-child>th, .table>thead:first-child>tr:first-child>th, .table>caption+thead>tr:first-child>td, .table>colgroup+thead>tr:first-child>td, .table>thead:first-child>tr:first-child>td {
+    border-top: 0;
+}
+
+table.data thead tr th {
+    padding: 20px 0;
+    border-bottom: solid 5px #ce132d;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    vertical-align: middle;
+}
+.table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+.text-uppercase {
+    text-transform: uppercase;
+}
+table.matches-round thead tr th:nth-child(2) .tbl-hd-label {
+    text-align: right;
+}
+
+@media (max-width: 1200px){
+    table.data thead tr th .tbl-hd-label {
+        display: block;
+        text-align: center;
+        color: #ffffff;
+        font-size: 1em;
+        font-weight: 600;
+    }
+}
+table.data thead tr th .tbl-hd-label {
+    display: block;
+    text-align: center;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.matches-sub-title {
+    background-color: #1e1e1e;
+    font-size: 1.3125rem;
+    font-weight: 800;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    line-height: 1.4em;
+    padding: 0.4em 0.8em 0.4em 0.8em;
+    color: #fff;
+}
+.text-right {
+    text-align: right;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.text-right {
+    text-align: right;
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.tounam{
+    display: flex;
+}
+#footer{
+    background-color: #1e1e1e;
+}
+#bgdark{
+    background-color: #1e1e1e;
+}
+.sec-2-button-div {
+    padding-top: 7vw;
+}
+
+@media (max-width: 1200px){
+    table.data tbody tr td {
+        font-size: 0.75em!important;
+    }
+}
+table.data tbody tr td{
+    font-weight: 400;
+}
+table.matches-round tbody tr td:nth-child(3) {
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+.text-left{
+    text-align: left;
+}
+.tour-nam{
+    display: flex;
+    color: #fff;
+
+}
+.tour-h3{
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-left: 20vw;
+    padding: 10px;
+    background-color: #1e1e1e;
+}
+.drawbutton{
+    margin-right: 22vw;
+    margin-left: 30vw;
+}
+@media (max-width: 780px){
+    .tour-h3{
+        margin-left: 0vw;
+    }
+    .drawbutton{
+        /* margin-left: 45vw; */
+        margin-right: 1vw;
+        align-items: flex-end;
+        justify-content: flex-end;
+        text-align: right;
+    }
+}
+.content-area-button{
+    margin-right: 21vw;
+}
+@media (max-width: 780px){
+    .content-area-button{
+        margin-right: 6vw;
+    }
+}
+.righttt{
+    display: flex;
+
+}
+.drawbutton{
+    justify-content: flex-end;
+}
+
+.tounamnam{
+    width: 50%;
+}
+
+.sec-2-button-div{
+    display: flex;
+    justify-content: center;
+}
+
+.sec-2-button1{
+    width: 30%;
+}
+.sec-2-button2{
+    width: 30%;
+}
+
+@media (max-width: 780px){
+    .sec-2-button1{
+        width: 50%;
+    }
+    .sec-2-button2{
+        width: 50%;
+    }
+}
+
+.text-left{
+    padding-right: 0;
+}
+.text-right{
+    padding: 0;
+}
+.text-center{
+    padding: 0;
+}
+table.matches-round tbody tr td:nth-child(2) {
+    text-align: center;
+    padding-top: 1.2em;
+}
+.row>* {
+    flex-shrink: 0;
+    width: 33%;
+    max-width: 100%;
+    margin-top: var(--bs-gutter-y);
+}
+
+@media (max-width: 480px){
+    .sec-2-button2 {
+        font-size: 2.5vw;
+    }
+    .sec-2-button1 {
+        font-size: 2.5vw;
+    }
+    .daterdiv{
+        margin-bottom: 8vw;
+    }
+    .sec-2-button-div {
+        padding-top: 14vw;
+        padding-bottom: 6vw;
+    }
+}

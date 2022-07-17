@@ -6,4 +6,4 @@
         <img src="{{ asset('assets/front') }}/images/sponsor-3.png" alt="SPONSOR">
     </div>
 </div>
-</section>
+

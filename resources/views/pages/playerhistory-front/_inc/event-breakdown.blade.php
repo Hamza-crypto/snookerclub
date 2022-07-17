@@ -1,4 +1,4 @@
-<section class="section5">
+
     <div class="eventbreakdown">
         <h1>EVENT BREAKDOWN</h1>
         <div class="table2div">

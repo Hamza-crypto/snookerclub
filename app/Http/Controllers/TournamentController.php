@@ -67,13 +67,25 @@ class TournamentController extends Controller
         return redirect()->route('matches.index');
     }
 
-    public function results()
+    public function results2()
     {
         $matches = Tournament::latest()
             ->whereDate('year', Carbon::today())
             ->get();
 
         return view('pages.matches.results', compact('matches'));
+    }
+
+    public function results()
+    {
+        $matches = Tournament::latest()
+            ->whereDate('year', Carbon::today())
+            ->where('type', 'snooker')
+            ->get();
+
+        $matches = $matches->groupBy('tournament')->all();
+
+        return view('pages.results.index', compact('matches'));
     }
 
 }

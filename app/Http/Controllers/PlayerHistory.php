@@ -66,23 +66,24 @@ class PlayerHistory extends Controller
     public function index_front()
     {
         $data = request()->all();
-
         $graph_data = ['labels' => [], 'data' => [ 1, 1]];
         $matches = [];
+        $player1_win_percentage = 0;
+        $player2_win_percentage = 0;
 
         if(!isset($data['player1']) || !isset($data['player2']) ){
-
             $player1 = Player::where('highlighted', 1)->first();
             $player2 = Player::where('highlighted', 1)->skip(1)->take(1)->first();
+            $data['type'] = 'snooker';
         }
-        else{
-            $data['type'] = '8-pool';
+        else {
             $player1 = Player::where('name', 'like', '%' . $data['player1'] . '%')->first();
             $player2 = Player::where('name', 'like', '%' . $data['player2'] . '%')->first();
 
-            if(!$player1 || !$player2){
-                return back()->withInput()->withErrors(['player1' => 'Player not found']);
+            if (!$player1 || !$player2) {
+                return redirect()->route('homepage.front');
             }
+        }
 
 
             $player1_wins = 0;
@@ -114,7 +115,6 @@ class PlayerHistory extends Controller
                     'data' => [$player2_wins, $player1_wins]
                 ];
             }
-        }
 
 //        dd($graph_data['labels'], $player1_win_percentage, $player2_win_percentage);
 
