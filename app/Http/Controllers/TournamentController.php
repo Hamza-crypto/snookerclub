@@ -78,9 +78,18 @@ class TournamentController extends Controller
 
     public function results()
     {
+        $data = request()->all();
+
+        if(!isset($data['date'])){
+            $data['date'] = Carbon::today();
+        }
+        if(!isset($data['type'])){
+            $data['type'] = 'snooker';
+        }
+
         $matches = Tournament::latest()
-            ->whereDate('year', Carbon::today())
-            ->where('type', 'snooker')
+            ->whereDay('year', $data['date'])
+            ->where('type', $data['type'])
             ->get();
 
         $matches = $matches->groupBy('tournament')->all();

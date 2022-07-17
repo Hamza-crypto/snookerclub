@@ -10,14 +10,14 @@
     </div>
     <div class="sec3playernamediv">
         <div class="player1name d-flex flex-column">
-            <h2 class="player1Score">1</h2>
+            <h2 class="player1Score"> {{ $player1_wins }} </h2>
             <div class="d-flex flex-column">
                 <h3> {{ $player1->name }}</h3>
 
             </div>
         </div>
         <div class="player2name d-flex flex-column">
-            <h2 class="player2Score">2</h2>
+            <h2 class="player2Score"> {{ $player2_wins }}  </h2>
             <div class="d-flex flex-column">
                 <h3> {{ $player2->name }}</h3>
 

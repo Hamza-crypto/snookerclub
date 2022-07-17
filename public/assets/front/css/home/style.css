@@ -129,7 +129,7 @@ body{
 }
 
 .section2{
-    background-image: url('../images/section-2-bg.png');
+    background-image: url('../../images/section-2-bg.png');
     background-color: black;
     width: 100vw;
     background-repeat: no-repeat;

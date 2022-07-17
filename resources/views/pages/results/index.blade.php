@@ -64,6 +64,7 @@
     // if(localStorage.getItem('baseUrl') === null) localStorage.setItem('baseUrl', window.location.href);
     var curr = moment();
     var count = 0,mid = 0;
+    var request_count = "{{ request()->count ?? -100 }}";
     let startDate =  moment().subtract(6, 'days');
     let startDate2 =  startDate;
     let endDate = moment().add(6, 'days');
@@ -75,10 +76,18 @@
         changeState();
     }
     function changeState(){
+        var s_val;
         var selectedText = $('#select1 option:selected').text();
-        let parsed = moment(selectedText, "DD/MM dd");
-        var s_val = parsed.format('D');
-        url = `${window.location.origin+window.location.pathname}?type=${gameType}&date=${s_val}`;
+        var count = $('#select1 option:selected').val();
+        if(selectedText == 'Today'){
+            s_val = new Date().getDate();
+        }
+        else{
+            let parsed = moment(selectedText, "DD/MM dd");
+            s_val = parsed.format('D');
+        }
+
+        url = `${window.location.origin+window.location.pathname}?type=${gameType}&date=${s_val}&count=${count}`;
         window.history.pushState({ path: url }, '', url);
         window.location.reload();
     }
@@ -89,10 +98,13 @@
             startDate = startDate.add(1, 'day');
         }
         count = mid = (count-1 )/ 2;
-        $(`#select1 option[value=${count}]`).attr("selected",true);
+        if(request_count == -100){
+            $(`#select1 option[value=${count}]`).attr("selected",true);
+        }
+        else{
+            $(`#select1 option[value=${request_count}]`).attr("selected",true);
+        }
         $("#left").click(function() {
-
-
 
             $("#right").css({opacity: 1,fontSize: 20});
             var z = DateMap[--count].format('DD/MM dd');
@@ -109,10 +121,6 @@
         });
 
         $("#right").click(function() {
-
-
-
-
 
             $("#left").css({opacity: 1,fontSize: 20});
             DateMap[++count].format('DD/MM dd');

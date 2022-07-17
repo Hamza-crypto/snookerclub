@@ -25,7 +25,7 @@ class TournamentFactory extends Factory
             'rules' => $this->faker->word,
             'round' => $random + rand(1,10),
             'winner' => [$player_1, $player_2][rand(0,1)],
-            'result' => $random + rand(1,10),
+            'result' => sprintf('%02d', $random) . ' ' . sprintf('%02d', $random),
             'type' => ['8-pool', 'snooker'][rand(0,1)]
         ];
     }

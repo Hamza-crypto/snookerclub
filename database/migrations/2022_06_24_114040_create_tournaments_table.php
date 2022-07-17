@@ -17,7 +17,7 @@ class CreateTournamentsTable extends Migration
             $table->id();
             $table->integer('player_1');
             $table->integer('player_2');
-            $table->date('year')->nullable();
+            $table->timestamp('year')->nullable();
             $table->text('tournament')->nullable();
             $table->text('rules')->nullable();
             $table->text('round')->nullable();
