@@ -26,7 +26,7 @@
     </div>
     <div class="playerimg">
         <div class="player1img">
-            <img src="{{ asset('assets/front') }}/images/player-1.png" alt="PLAYER 1">
+            <img src="{{ get_img_url($player1->image1) }}" alt="{{ $player1->name }}">
         </div>
         <div class="circlediv d-flex justify-content-center align-items-center">
             <div class="percent">
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="player2img">
-            <img src="{{ asset('assets/front') }}/images/player-2.png" alt="PLAYER 2">
+            <img src="{{ get_img_url($player2->image1) }}" alt="{{ $player2->name }}">
         </div>
     </div>
 </section>

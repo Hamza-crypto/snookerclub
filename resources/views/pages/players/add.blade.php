@@ -178,13 +178,13 @@
                                     <label for="image">Profile photo</label>
                                     <input
                                         type="file"
-                                        name="image2"
+                                        name="image1"
                                     />
                                 </div>
 
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-6 d-none">
                                 <div class="form-group">
                                     <label for="image">Passport size photo</label>
                                     <input
