@@ -2,7 +2,7 @@
 {{--{{ dd($match) }}--}}
 <div class="tour-nam">
 
-    <div class="tounamnam"><h3 class="tour-h3"> Tournament: {{ $key }}</h3></div>
+    <div class="tounamnam"><h3 class="tour-h3">{{ $key }}</h3></div>
 
 
     <div class="rightt">
