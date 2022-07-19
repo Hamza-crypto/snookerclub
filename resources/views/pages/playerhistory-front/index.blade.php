@@ -9,9 +9,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Title</title>
     <style>
+
         .navbar-brand img {
-            width: 17%;
+            width: 75%;
         }
+        @media only screen and (max-width: 768px) {
+            /* For mobile phones: */
+            .navbar-brand img {
+                width: 40%;
+            }
+        }
+
     </style>
 </head>
 <body>

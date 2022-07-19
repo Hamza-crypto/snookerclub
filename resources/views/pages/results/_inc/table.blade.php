@@ -1,5 +1,4 @@
 @foreach($matches as $key => $match)
-{{--{{ dd($match) }}--}}
 <div class="tour-nam">
 
     <div class="tounamnam"><h3 class="tour-h3">{{ $key }}</h3></div>
@@ -58,3 +57,21 @@
     </table>
 </div>
 @endforeach
+
+@if(count($matches) == 0)
+
+    <div class="tablediv">
+        <table class="table table-responsive data matches-round" id="round1">
+            <colgroup>
+                <col class="col-1">
+            </colgroup>
+            <thead>
+            <tr>
+                <th > <span class="tbl-hd-label-not-found">No matches planned for this date</span> </th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+@endif

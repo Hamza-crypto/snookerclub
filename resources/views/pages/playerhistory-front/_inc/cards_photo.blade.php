@@ -1,13 +1,19 @@
+
 <section class="section3">
     <div class="sec-3-div">
         <div class="div1sec3">
-            <input class="pnames player1" type="text" name="player1" value="{{ request()->player1 }}" placeholder="Player 1" onchange="setName('player1')">
+            <input class="pnames player1" list="playerss" type="text" name="player1" value="{{ request()->player1 }}" placeholder="Player 1" onchange="setName('player1')">
         </div>
         <button class="div2sec3" onclick="changeState_head2head()" type="button">Show Head2Head Details</button>
         <div class="div3sec3">
-            <input class="pnames player2" type="text" name="player2" value="{{ request()->player2 }}" placeholder="Player 2" onchange="setName('player2')">
+            <input class="pnames player2" list="playerss" type="text" name="player2" value="{{ request()->player2 }}" placeholder="Player 2" onchange="setName('player2')">
         </div>
     </div>
+    <datalist id="playerss">
+        @foreach($players as $player)
+            <option value="{{ $player->name }}">
+        @endforeach
+    </datalist>
     <div class="sec3playernamediv">
         <div class="player1name d-flex flex-column">
             <h2 class="player1Score"> {{ $player1_wins }} </h2>
@@ -32,7 +38,9 @@
             <div class="percent">
                 <svg>
                     <circle cx="105" cy="105" r="100"></circle>
-                    <circle id="progress" cx="105" cy="105" r="100" style="--percent: {{ $player2_win_percentage }}"></circle>
+                    <circle id="progress" cx="105" cy="105" r="100" style="--percent:
+{{ $player1_win_percentage == $player2_win_percentage && $player1_win_percentage  == 0 ? 50 : $player2_win_percentage }}
+                        "></circle>
                 </svg>
                 <div class="number">
                     <div class="versus">VS</div>
