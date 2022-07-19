@@ -15,7 +15,17 @@
 
     <style>
         .navbar-brand img {
-            width: 17%;
+            width: 75%;
+        }
+        @media only screen and (max-width: 768px) {
+            /* For mobile phones: */
+            .navbar-brand img {
+                width: 40%;
+            }
+
+            .tbl-hd-label {
+                font-size: 0.8em !important;
+            }
         }
     </style>
 <body>

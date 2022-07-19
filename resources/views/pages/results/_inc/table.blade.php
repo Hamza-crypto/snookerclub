@@ -67,7 +67,7 @@
             </colgroup>
             <thead>
             <tr>
-                <th > <span class="tbl-hd-label-not-found">No matches planned for this date</span> </th>
+                <th > <span class="tbl-hd-label">No matches planned for this date</span> </th>
             </tr>
             </thead>
             <tbody>
