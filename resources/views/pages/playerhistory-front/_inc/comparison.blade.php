@@ -48,9 +48,9 @@
             <td class="darkerwhite"> {{ $player2->titles }} </td>
         </tr>
         <tr>
-            <td class="darkwhite"> ${{ $player1->earnings }} </td>
+            <td class="darkwhite"> {{ $player1->earnings }} MAD </td>
             <td class="darkerred">TOTAL EARNINGS</td>
-            <td class="darkwhite"> ${{ $player2->earnings }}</td>
+            <td class="darkwhite"> {{ $player2->earnings }} MAD</td>
         </tr>
     </table>
 </section>

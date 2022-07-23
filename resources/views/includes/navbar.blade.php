@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark" id="bgdark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ route('homepage.front') }}">
             <img src="{{ asset('assets/front') }}/images/logo.png">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
