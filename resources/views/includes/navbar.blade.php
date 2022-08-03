@@ -46,17 +46,15 @@
                     <a class="nav-link" id="navitem" href="{{ route('tournament.results') }}">SCORES</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="navitem" href="https://live.snookernpool.com/scores">WATCH LIVE</a>
+                    <a class="nav-link" id="navitem" href="https://live.snookernpool.com">WATCH LIVE</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="navitem" href="https://live.snookernpool.com/scores">CALENDER</a>
+                    <a class="nav-link" id="navitem" href="https://live.snookernpool.com/calender">CALENDER</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="navitem" href="{{ route('tournament.about') }}">ABOUT US</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="navitem" href="{{ route('tournament.contact') }}">CONTACT US</a>
-                </li>
+
             </ul>
         </div>
     </div>
