@@ -24,7 +24,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [PlayerHistory::class, 'index_front'])->name('homepage.front');
+
 Route::get('scores', [TournamentController::class, 'results'])->name('tournament.results');
+Route::get('contact', [TournamentController::class, 'contact'])->name('tournament.contact');
 Route::get('about', [TournamentController::class, 'about'])->name('tournament.about');
 
 Route::get('results2', [TournamentController::class, 'results2'])->name('tournament.results2');
@@ -58,6 +60,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('password/{user}', [UsersController::class, 'password_update'])->name('user.password_update');
 
         Route::get('/reset', function () {
+ dd('Nothing to do');
 
             if (env('APP_ENV') != 'local') {
                 dd('Nothing to do');

@@ -22,7 +22,7 @@
             .navbar-brand img {
                 width: 40%;
             }
-
+            
             .tbl-hd-label {
                 font-size: 0.8em !important;
             }

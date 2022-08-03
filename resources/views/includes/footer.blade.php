@@ -1,22 +1,27 @@
-
-    <footer>
-        
-
-        <nav class="navbar navbar-expand-lg footer" id="footer">
-            <div class="container-fluid">
-                <!--<a class="navbar-brand" id="footerlogo" href="#">Logo</a>-->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link footernav active" aria-current="page" href="#">Contact</a>
-                        <a class="nav-link footernav" href="#">Privacy Policy</a>
-                        <a class="nav-link footernav" href="#">Terms of service</a>
-                    </div>
-                </div>
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row text-muted">
+            <div class="col-6 text-left">
+{{--                <ul class="list-inline">--}}
+{{--                    <li class="list-inline-item">--}}
+{{--                        <a class="text-muted" href="#">Support</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="list-inline-item">--}}
+{{--                        <a class="text-muted" href="#">Help Center</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="list-inline-item">--}}
+{{--                        <a class="text-muted" href="#">Privacy</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="list-inline-item">--}}
+{{--                        <a class="text-muted" href="#">Terms of Service</a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
             </div>
-        </nav>
-        <p id="footer-text">18, Av Omar Ibn Al Khattab Agdal - Rabat | Phone: (+212) 6 21 30 78 78 | Email: contact@snookernpool.com <br><br> Copyright © 2022 Snookernpool</p>
-        <!-- <div class="copyright">© 2022 - SNOOKERNPOOL</div> -->
-    </footer>
+            <div class="col-6 text-right">
+                <p class="mb-0">
+                    &copy; {{ date('Y') }} - <a href="{{ env('APP_URL') }}" class="text-muted">{{ env('APP_NAME') }}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>

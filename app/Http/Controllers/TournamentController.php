@@ -97,9 +97,12 @@ class TournamentController extends Controller
         return view('pages.results.index', compact('matches'));
     }
 
+    public function contact()
+    {
+        return view('pages.contact.index');
+    }
     public function about()
     {
         return view('pages.about.index');
     }
-
 }

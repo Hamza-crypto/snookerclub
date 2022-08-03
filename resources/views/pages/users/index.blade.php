@@ -87,8 +87,6 @@
                                 <td class="table-action">
 
 
-
-
                                     <a href="{{ route('admin.users.edit', $user->id) }}" class="btn" style="display: inline">
                                         <i class="fa fa-edit text-info"></i>
                                     </a>
@@ -107,16 +105,7 @@
 
                                             </button>
                                         </form>
-
-                                            @canImpersonate($guard = null)
-                                            <a href="{{ route('impersonate', $user->id) }}" class="btn" style="display: inline">
-                                                <i class="fa fa-user-cog"></i>
-                                            </a>
-                                            @endCanImpersonate
                                         @endif
-
-
-
                                 </td>
                             </tr>
                         @endforeach

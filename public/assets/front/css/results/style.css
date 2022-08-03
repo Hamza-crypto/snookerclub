@@ -200,6 +200,12 @@ table.data {
     }
 }
 
+@media only screen and (max-width: 991px){
+    .navbar-dark .navbar-nav .nav-link {
+        font-size: 1rem;
+    }
+}
+
 #footer{
     background-color: #1A1F2B;
 }
@@ -467,7 +473,7 @@ table.matches-round tbody tr td:nth-child(3) {
 }
 .drawbutton{
     margin-right: 22vw;
-    margin-left: 30vw;
+    margin-left: 20vw;
 }
 @media (max-width: 780px){
     .tour-h3{
@@ -577,4 +583,31 @@ table.matches-round tbody tr td:nth-child(2) {
 .navbar {
     padding-top:0.3125rem!important;
     padding-bottom:0.3125rem!important;
+}
+@media (max-width: 780px){
+    .tour-h3 {
+        font-size:0.8em;
+    }
+}
+.text-left {
+    padding-left: 0;
+}
+table.matches-round tbody tr td:nth-child(2) {
+    text-align: center;
+    padding-top: 1.2em;
+    width: 33%;
+}
+#footer-text{
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 10px 10px 10px;
+    background-color: #1E1E1E;
+}
+@media (max-width: 480px){
+    .drawbutton{
+        margin-left:5vw;
+    }
+    .tounamnam {
+    width: 80%;
+}
 }

@@ -53,6 +53,12 @@ body{
     }
 }
 
+@media only screen and (max-width: 991px){
+    .navbar-dark .navbar-nav .nav-link {
+        font-size: 1rem;
+    }
+}
+
 
 
 
@@ -524,12 +530,12 @@ input[name="gameType"]:checked + label{
     width: 33vw;
 }
 .sponsorimg img:nth-child(2){
-    width:39vw;
-    padding: 6vw 3vw
+    width:33vw;
+    padding: 6vw 7.5vw
 }
 
 #footer{
-    background-color: #1A1F2B;
+    background-color: #1e1e1e;
 }
 #footer a{
     color: #ffffff;
@@ -797,5 +803,10 @@ input[name="gameType"]:checked + label{
     }
 }
 
-
+#footer-text{
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 10px 10px 10px;
+    background-color: #1E1E1E;
+}
 
