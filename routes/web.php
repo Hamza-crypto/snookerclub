@@ -7,6 +7,7 @@ use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\PlayerHistory;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 
@@ -28,6 +29,7 @@ Route::get('/', [PlayerHistory::class, 'index_front'])->name('homepage.front');
 Route::get('scores', [TournamentController::class, 'results'])->name('tournament.results');
 Route::get('contact', [TournamentController::class, 'contact'])->name('tournament.contact');
 Route::get('about', [TournamentController::class, 'about'])->name('tournament.about');
+Route::post('email', [TournamentController::class, 'send_email'])->name('contact.send_email');
 
 Route::get('results2', [TournamentController::class, 'results2'])->name('tournament.results2');
 

@@ -6,6 +6,7 @@ use App\Models\Tournament;
 use App\Models\Player;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class TournamentController extends Controller
@@ -104,5 +105,14 @@ class TournamentController extends Controller
     public function about()
     {
         return view('pages.about.index');
+    }
+
+    public function send_email(Request $request)
+    {
+        Mail::to('6793siddique@gmail.com')
+            ->send(new \App\Mail\NewContact($request->all()));
+
+        $submit = true;
+        return view('pages.contact.index', compact('submit'));
     }
 }

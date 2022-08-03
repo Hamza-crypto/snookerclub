@@ -23,18 +23,25 @@
 </div>
 <div class="content">
     <div class="c-form">
-        <h2>WE'RE READY, LET'S TALK.</h2>
+        @if(isset($submit))
+            <div class="alert alert-success">
+                <strong>Your message has been sent!</strong> We will get back to you as soon as possible.
+            </div>
+        @else
+            <h2>WE'RE READY, LET'S TALK.</h2>
+        @endif
         <div>
             <div class="contact-form-wrapper d-flex justify-content-center">
-                <form action="#" class="contact-form">
+                <form action="{{ route('contact.send_email') }}" method="post" class="contact-form">
+                    @csrf
                     <div>
-                        <input type="text" class="form-control rounded border-white mb-3 form-input" id="name" placeholder="Your Name" required>
+                        <input type="text" name="name" class="form-control rounded border-white mb-3 form-input" id="name" placeholder="Your Name" required>
                     </div>
                     <div>
-                        <input type="email" class="form-control rounded border-white mb-3 form-input" placeholder="Email Address" required>
+                        <input type="email" name="email" class="form-control rounded border-white mb-3 form-input" placeholder="Email Address" required>
                     </div>
                     <div>
-                        <textarea id="message" class="form-control rounded border-white mb-3 form-text-area" rows="5" cols="30" placeholder="Message" required></textarea>
+                        <textarea id="message" name="message" class="form-control rounded border-white mb-3 form-text-area" rows="5" cols="30" placeholder="Message" required></textarea>
                     </div>
                     <div class="submit-button-wrapper">
                         <input type="submit" value="Send Message">
