@@ -24,8 +24,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [PlayerHistory::class, 'index_front'])->name('homepage.front');
-
 Route::get('scores', [TournamentController::class, 'results'])->name('tournament.results');
+Route::get('about', [TournamentController::class, 'about'])->name('tournament.about');
+
 Route::get('results2', [TournamentController::class, 'results2'])->name('tournament.results2');
 
 Route::group(['middleware' => ['auth']], function () {
