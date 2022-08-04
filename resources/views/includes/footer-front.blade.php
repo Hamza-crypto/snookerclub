@@ -1,7 +1,5 @@
 
     <footer>
-
-
         <nav class="navbar navbar-expand-lg footer" id="footer">
             <div class="container-fluid">
                 <!--<a class="navbar-brand" id="footerlogo" href="#">Logo</a>-->
