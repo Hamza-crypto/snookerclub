@@ -8,10 +8,11 @@
 
             $(".daterange").daterangepicker({
                 singleDatePicker: true,
+                timePicker: true,
                 showDropdowns: true,
                 startDate: moment(),
                 locale: {
-                    format: "Y-MM-DD"
+                    format: "Y-MM-DD HH:mm:ss"
                 }
             });
 
@@ -144,6 +145,18 @@
                                             <option value="8-pool"> 8-Pool </option>
 
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <label class="form-label" for="draw"> Draw URL </label>
+                                    <input
+                                        class="form-control form-control-lg"
+                                        type="url"
+                                        name="draw_url"
+                                        placeholder="Enter draw URL"
+                                    />
                                 </div>
                             </div>
 

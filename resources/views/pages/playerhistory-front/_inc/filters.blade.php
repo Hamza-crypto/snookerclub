@@ -5,11 +5,11 @@
     </div>
     <form method="get" id="form" class="sec-2-button-div">
         <div class="sec-2-button1 d-flex justify-content-center align-items-center position-relative">
-            <input type="radio" name="gameType" value="POOL" onclick="checkRadio('8-pool')">
+            <input type="radio" name="gameType" value="POOL" @if( request()->type == '8-pool' || request()->type == null) checked @endif onclick="checkRadio('8-pool')">
             <label for="html">POOL</label><br>
         </div>
         <div class="sec-2-button2 d-flex justify-content-center align-items-center position-relative">
-            <input type="radio" name="gameType" value="SNOOKER" checked onclick="checkRadio('snooker')">
+            <input type="radio" name="gameType" value="SNOOKER" @if( request()->type == 'snooker' ) checked @endif onclick="checkRadio('snooker')">
             <label for="html">SNOOKER</label><br>
         </div>
     </form>

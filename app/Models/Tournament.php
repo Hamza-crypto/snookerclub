@@ -18,11 +18,12 @@ class Tournament extends Model
         'round',
         'winner',
         'result',
-        'type'
+        'type',
+        'draw_url',
     ];
 
     protected $casts = [
-        'year' => 'date'
+        'year' => 'datetime',
     ];
 
 

@@ -22,7 +22,7 @@
             .navbar-brand img {
                 width: 40%;
             }
-            
+
             .tbl-hd-label {
                 font-size: 0.8em !important;
             }
@@ -36,11 +36,11 @@
 <form class="sec-2-button-div">
     <div class="sec-2-button1 d-flex justify-content-center align-items-center position-relative">
 
-        <input type="radio" name="gameType" value="POOL" @if( request()->type == '8-pool' ) checked @endif onclick="checkRadio('8-pool')">
+        <input type="radio" name="gameType" value="POOL" @if( request()->type == '8-pool' || request()->type == null) checked @endif onclick="checkRadio('8-pool')">
         <label for="html">POOL</label><br>
     </div>
     <div class="sec-2-button2 d-flex justify-content-center align-items-center position-relative">
-        <input type="radio" name="gameType" value="SNOOKER"  @if( request()->type == 'snooker' || request()->type == null) checked @endif onclick="checkRadio('snooker')">
+        <input type="radio" name="gameType" value="SNOOKER"  @if( request()->type == 'snooker' ) checked @endif onclick="checkRadio('snooker')">
         <label for="html">SNOOKER</label><br>
     </div>
 </form>
@@ -79,7 +79,7 @@
     let startDate2 =  startDate;
     let endDate = moment().add(6, 'days');
     let DateMap = [];
-    let gameType = "{{ request()->type ?? 'snooker' }}";
+    let gameType = "{{ request()->type ?? '8-pool' }}";
     let url = window.location.href;
     function checkRadio(name){
         gameType = name;

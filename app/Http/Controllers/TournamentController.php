@@ -35,7 +35,8 @@ class TournamentController extends Controller
             'tournament' => $request->tournament,
             'rules' => $request->rules,
             'rounds' => $request->rounds,
-            'type' => $request->type
+            'type' => $request->type,
+            'draw_url' => $request->draw_url
         ]);
 
         Session::flash('success', 'Tournament successfully added.');
@@ -85,7 +86,7 @@ class TournamentController extends Controller
             $data['date'] = Carbon::today();
         }
         if(!isset($data['type'])){
-            $data['type'] = 'snooker';
+            $data['type'] = '8-pool';
         }
 
         $matches = Tournament::latest()

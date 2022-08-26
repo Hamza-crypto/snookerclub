@@ -27,7 +27,7 @@
 @include('includes.navbar')
 <section class="section1">
     <div class="sec-1-div1">
-        <h1 class="sec-1-h1 text-white">BETVICTOR CHAMPIONSHIP LEAGUE</h1>
+        <h1 class="sec-1-h1 text-white">Fibretec Communications 67K Challenge 2023 Qualifications</h1>
         <button class="sec-1-button text-white" type="button">LIVE SCORES</button>
     </div>
 </section>
@@ -50,7 +50,7 @@
 @include('includes.footer-front')
 
 <script>
-    var gameType = "snooker";
+    var gameType = "8-pool";
     // let p1 =  parseInt(document.getElementsByClassName("player1Score")[0].innerText);
     // let p2 =  parseInt(document.getElementsByClassName("player2Score")[0].innerText);
     // let progress = document.getElementById("progress");
