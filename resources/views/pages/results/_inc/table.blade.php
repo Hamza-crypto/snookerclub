@@ -40,7 +40,7 @@
                 <tr class="odd">
                     @if ($loop->iteration % 2 == 0)
 
-                        <td rowspan="1" style="background: #040202 !important;"> {{ $item->year->format('H:i') }}</td>
+                        <td rowspan="1" style="background: #ff2c2c !important;"> {{ $item->year->format('H:i') }}</td>
                     @else
                         <td rowspan="1"> {{ $item->year->format('H:i') }}</td>
                     @endif

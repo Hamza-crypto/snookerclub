@@ -28,7 +28,7 @@
     </div>
     <div class="sec-3">
         <div class="img"></div>
-        <img src="https://cdn.pixabay.com/photo/2022/05/18/12/04/flower-7205105_960_720.jpg" alt="Image">
+        <img src="https://i.imgur.com/l0XWHLP.jpg" alt="Image">
         <p>After three months of hard work, we finally launched our project publicly on July 31, 2022.</p>
     </div>
 </div>

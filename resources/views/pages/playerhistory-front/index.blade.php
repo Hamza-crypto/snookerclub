@@ -27,7 +27,7 @@
 @include('includes.navbar')
 <section class="section1">
     <div class="sec-1-div1">
-        <h1 class="sec-1-h1 text-white">Fibretec Communications 67K Challenge 2023 Qualifications</h1>
+        <h1 class="sec-1-h1 text-white">FIBRETEC COMMUNICATIONS 67K CHALLENGE</h1>
         <button class="sec-1-button text-white" type="button">LIVE SCORES</button>
     </div>
 </section>

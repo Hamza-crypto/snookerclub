@@ -22,7 +22,7 @@
             .navbar-brand img {
                 width: 40%;
             }
-
+            
             .tbl-hd-label {
                 font-size: 0.8em !important;
             }
@@ -79,7 +79,7 @@
     let startDate2 =  startDate;
     let endDate = moment().add(6, 'days');
     let DateMap = [];
-    let gameType = "{{ request()->type ?? '8-pool' }}";
+    let gameType = "{{ request()->type ?? 'snooker' }}";
     let url = window.location.href;
     function checkRadio(name){
         gameType = name;

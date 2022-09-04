@@ -272,7 +272,7 @@ table.data {
 }
 
 table.matches-round tbody tr:not(.extender).odd td:first-child {
-    background: none repeat scroll 0 0 #e21a4c !important;
+    background: none repeat scroll 0 0 #ee0202 !important;
     color: #fff;
     font-weight: bold;
     font-size: 1.2em;

@@ -72,7 +72,7 @@ class PlayerHistory extends Controller
         if (!isset($data['player1']) || !isset($data['player2'])) {
             $player1 = Player::where('highlighted', 1)->first();
             $player2 = Player::where('highlighted', 1)->skip(1)->take(1)->first();
-            $data['type'] = '8-pool';
+            $data['type'] = 'snooker';
         } else {
             $player1 = Player::where('name', 'like', '%' . $data['player1'] . '%')->first();
             $player2 = Player::where('name', 'like', '%' . $data['player2'] . '%')->first();

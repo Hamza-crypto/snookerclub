@@ -808,5 +808,7 @@ input[name="gameType"]:checked + label{
     text-align: center;
     padding: 20px 10px 10px 10px;
     background-color: #1E1E1E;
+    margin-bottom:0;
 }
+
 

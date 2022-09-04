@@ -54,7 +54,7 @@
                 <li class="nav-item">
                     <a class="nav-link" id="navitem" href="{{ route('tournament.about') }}">ABOUT US</a>
                 </li>
-
+               
             </ul>
         </div>
     </div>
