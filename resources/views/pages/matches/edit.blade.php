@@ -146,6 +146,7 @@ $player2 = get_player_name($match->player_2 );
                                         class="form-control form-control-lg"
                                         type="number"
                                         name="score_player_1"
+                                        value="{{ $match->score_player_1 }}"
                                         placeholder="Enter Score"
                                     />
                                 </div>
@@ -159,6 +160,7 @@ $player2 = get_player_name($match->player_2 );
                                         class="form-control form-control-lg"
                                         type="number"
                                         name="score_player_2"
+                                        value="{{ $match->score_player_2 }}"
                                         placeholder="Enter Score"
                                     />
                                 </div>
@@ -176,8 +178,8 @@ $player2 = get_player_name($match->player_2 );
                                             class="form-control form-select custom-select select2"
                                             data-toggle="select2">
                                         <option value="-100" selected> Select Winner</option>
-                                        <option value="{{ $match->player_1 }}"> {{ $player1 }}</option>
-                                        <option value="{{ $match->player_2 }}"> {{ $player2 }}</option>
+                                        <option value="{{ $match->player_1 }}" @if($match->winner == $match->player_1) selected @endif> {{ $player1 }}</option>
+                                        <option value="{{ $match->player_2 }}" @if($match->winner == $match->player_2) selected @endif> {{ $player2 }}</option>
 
                                     </select>
                                 </div>
