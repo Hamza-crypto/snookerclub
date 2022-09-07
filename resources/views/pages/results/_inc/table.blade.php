@@ -1,7 +1,7 @@
 @foreach($matches as $key => $match)
     <div class="tour-nam">
 
-        <div class="tounamnam"><h3 class="tour-h3">{{ $key }}</h3></div>
+        <div class="tounamnam"><h3 class="tour-h3">{{ $key }} - {{ $match[0]->round }}</h3></div>
 
 
         <div class="rightt">
@@ -48,13 +48,15 @@
                     <td>
                         <div class="row odds-parent">
                             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 text-right">
-                                <span class="score"> {{ explode(' ', $item->result ?? '- -')[0] ?? '-' }}  </span>
+                                <span class="score {{ $item->score_player_1 < $item->score_player_2 ? 'normal-score' : '' }}"> {{ $item->score_player_1 ?? '-' }}  </span>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center"><abbr class="versus"
-                                                                                               title="Versus">v</abbr>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center" >
+                                <abbr class="versus normal-score" title="Versus">
+                                    v
+                                </abbr>
                             </div>
                             <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 text-left">
-                                <span class="score"> {{ explode(' ', $item->result ?? '- -')[1] ?? '-' }} </span>
+                                <span class="score {{ $item->score_player_2 < $item->score_player_1 ? 'normal-score' : '' }}" > {{ $item->score_player_2 ?? '-' }} </span>
                             </div>
                         </div>
                     </td>

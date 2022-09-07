@@ -27,7 +27,7 @@
             <td class="darkerwhite"> {{ $player2->professional_since }} </td>
         </tr>
 
-        @if( !isset(request()->type) || request()->type == 'snooker')
+        @if( isset(request()->type) && request()->type == 'snooker')
             <tr>
                 <td class="darkerwhite"> {{ $player1->highest_break }} </td>
                 <td class="darkred">HIGHEST BREAK</td>

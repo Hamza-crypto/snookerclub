@@ -34,7 +34,7 @@ class TournamentController extends Controller
             'year' => $request->year,
             'tournament' => $request->tournament,
             'rules' => $request->rules,
-            'rounds' => $request->rounds,
+            'round' => $request->round,
             'type' => $request->type,
             'draw_url' => $request->draw_url
         ]);
@@ -52,9 +52,10 @@ class TournamentController extends Controller
     {
         //update match
         $match->update([
-            'rounds' => $request->rounds,
+            'round' => $request->round,
             'winner' => $request->winner,
-            'result' => $request->result
+            'score_player_1' => $request->score_player_1,
+            'score_player_2' => $request->score_player_2
         ]);
 
         Session::flash('success', 'Successfully updated.');
@@ -89,7 +90,7 @@ class TournamentController extends Controller
             $data['type'] = '8-pool';
         }
 
-        $matches = Tournament::latest()
+        $matches = Tournament::oldest('year')
             ->whereDay('year', $data['date'])
             ->where('type', $data['type'])
             ->get();

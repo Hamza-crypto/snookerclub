@@ -20,6 +20,8 @@ class Tournament extends Model
         'result',
         'type',
         'draw_url',
+        'score_player_1',
+        'score_player_2',
     ];
 
     protected $casts = [

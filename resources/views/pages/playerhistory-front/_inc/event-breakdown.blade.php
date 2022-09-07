@@ -8,8 +8,8 @@
                     <td class="darkred">Event</td>
                     <td class="darkerred">Rules</td>
                     <td class="darkred">Round</td>
+                    <td class="darkred">Score</td>
                     <td class="darkerred">Winner</td>
-                    <td class="darkred">Result</td>
                 </tr>
                 @if(count($matches) > 0)
                     @foreach($matches as $match)
@@ -18,8 +18,8 @@
                             <td> {{ $match->tournament }} </td>
                             <td>{{ $match->rules }}</td>
                             <td>{{ $match->round }}</td>
+                            <td>{{ $match->score_player_1 }}-{{ $match->score_player_2 }}</td>
                             <td> {{ $match->winner == $player2->id ? $player2->name : $player1->name }}</td>
-                            <td>{{ $match->result }}</td>
                         </tr>
                     @endforeach
                 @else

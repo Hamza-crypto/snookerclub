@@ -127,8 +127,39 @@ $player2 = get_player_name($match->player_2 );
                                     <input
                                         class="form-control form-control-lg"
                                         type="text"
-                                        name="rounds"
-                                        placeholder="Enter rounds"
+                                        name="round"
+                                        placeholder="Enter round"
+                                        value="{{ $match->round }}"
+                                    />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="result">Score player 1</label>
+                                    <input
+                                        class="form-control form-control-lg"
+                                        type="number"
+                                        name="score_player_1"
+                                        placeholder="Enter Score"
+                                    />
+                                </div>
+
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="result">Score player 2</label>
+                                    <input
+                                        class="form-control form-control-lg"
+                                        type="number"
+                                        name="score_player_2"
+                                        placeholder="Enter Score"
                                     />
                                 </div>
 
@@ -149,19 +180,6 @@ $player2 = get_player_name($match->player_2 );
                                         <option value="{{ $match->player_2 }}"> {{ $player2 }}</option>
 
                                     </select>
-                                </div>
-
-                            </div>
-
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="result">Result</label>
-                                    <input
-                                        class="form-control form-control-lg"
-                                        type="text"
-                                        name="result"
-                                        placeholder="Enter Result"
-                                    />
                                 </div>
 
                             </div>

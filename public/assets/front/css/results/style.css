@@ -611,3 +611,7 @@ table.matches-round tbody tr td:nth-child(2) {
     width: 80%;
 }
 }
+
+.normal-score {
+    font-weight: normal;
+}
