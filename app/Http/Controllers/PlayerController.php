@@ -50,7 +50,6 @@ class PlayerController extends Controller
             'residence' => $request->residence,
             'plays_with' => $request->plays_with,
             'professional_since' => $year,
-            'won_lost' => $request->won_lost,
             'titles' => $request->titles,
             'earnings' => $request->earnings,
             'image1' => $image_1_name,

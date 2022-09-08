@@ -38,9 +38,9 @@
 
 
         <tr>
-            <td class="darkwhite">{{ $player1->won_lost }}</td>
+            <td class="darkwhite">{{ $player1_win_loss_ratio }}</td>
             <td class="darkerred">WON/LOST</td>
-            <td class="darkwhite"> {{ $player2->won_lost }} </td>
+            <td class="darkwhite"> {{ $player2_win_loss_ratio }}</td>
         </tr>
         <tr>
             <td class="darkerwhite"> {{ $player1->titles }} </td>

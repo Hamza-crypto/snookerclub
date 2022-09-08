@@ -22,6 +22,8 @@ class CreateTournamentsTable extends Migration
             $table->text('rules')->nullable();
             $table->text('round')->nullable();
             $table->integer('winner')->nullable();
+            $table->integer('score_player_1')->nullable();
+            $table->integer('score_player_2')->nullable();
             $table->text('result')->nullable();
             $table->text('type')->nullable();
             $table->text('draw_url')->nullable();

@@ -7,6 +7,7 @@ use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\PlayerHistory;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
+use App\Models\Tournament;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -24,14 +25,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/test', function() {
 
-    $msg = "You just got a new contact request from Usman \nEmail: abc@gmail.com \n Message: this is msg";
-
-// use wordwrap() if lines are longer than 70 characters
-$msg = wordwrap($msg,70);
-$headers = "From: snookernpool" . "\r\n";
-
-// send email
-mail("6793siddique@gmail.com","New Contact Request",$msg, $headers);
+    $matches = Tournament::WhereIn('player_1', [$player1->id, $player2->id])
+        ->WhereIn('player_2', [$player1->id, $player2->id])
+        ->get();
+    $player1_wins = $matches->where('winner', $player1->id)->count();
+    $player2_wins = $matches->where('winner', $player2->id)->count();
 });
 
 Route::get('/', [PlayerHistory::class, 'index_front'])->name('homepage.front');
@@ -72,14 +70,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('password/{user}', [UsersController::class, 'password_update'])->name('user.password_update');
 
         Route::get('/reset', function () {
-//            dd('Nothing to do');
+            dd('Nothing to do');
 
             if (env('APP_ENV') != 'local') {
                 dd('Nothing to do');
                 return;
             }
-//            \Artisan::call('migrate:fresh');
-//            \Artisan::call('db:seed');
+            \Artisan::call('migrate:fresh');
+            \Artisan::call('db:seed');
             \Artisan::call('optimize:clear');
             dd('Database cleared');
         });

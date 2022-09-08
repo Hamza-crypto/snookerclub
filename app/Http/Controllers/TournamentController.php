@@ -53,7 +53,7 @@ class TournamentController extends Controller
         //update match
         $match->update([
             'round' => $request->round,
-            'winner' => $request->winner,
+            'winner' => $request->winner == -100 ? null : $request->winner,
             'score_player_1' => $request->score_player_1,
             'score_player_2' => $request->score_player_2
         ]);

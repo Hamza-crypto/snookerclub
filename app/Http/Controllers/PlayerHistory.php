@@ -72,7 +72,8 @@ class PlayerHistory extends Controller
         if (!isset($data['player1']) || !isset($data['player2'])) {
             $player1 = Player::where('highlighted', 1)->first();
             $player2 = Player::where('highlighted', 1)->skip(1)->take(1)->first();
-            $data['type'] = 'snooker';
+            $data['type'] = '8-pool';
+
         } else {
             $player1 = Player::where('name', 'like', '%' . $data['player1'] . '%')->first();
             $player2 = Player::where('name', 'like', '%' . $data['player2'] . '%')->first();
@@ -91,6 +92,30 @@ class PlayerHistory extends Controller
             ->Where('type', $data['type'])
             ->get();
 
+        /**
+         * Get player's overall wins/lost ratio dynamically
+         */
+        $player1_all_matches = Tournament::Where('type', $data['type'])
+
+            ->where(function ($q) use ($player1) {
+                $q->where('player_1', $player1->id)
+                    ->orWhere('player_2', $player1->id);
+            })->get();
+        $player1_all_wins = $player1_all_matches->where('winner', $player1->id)->count();
+        $player1_win_loss_ratio =sprintf('%d / %d', $player1_all_wins , $player1_all_matches->count() - $player1_all_wins);
+
+        $player2_all_matches = Tournament::Where('type', $data['type'])
+            ->whereNotNull('winner')
+            ->where(function ($q) use ($player2) {
+                $q->where('player_1', $player2->id)
+                    ->orWhere('player_2', $player2->id);
+            })->get();
+        $player2_all_wins = $player2_all_matches->where('winner', $player2->id)->count();
+        $player2_win_loss_ratio =sprintf('%d / %d', $player2_all_wins , $player2_all_matches->count() - $player2_all_wins);
+
+        /**
+         * wins/lost ratio dynamically end
+         */
 
         if (count($matches) > 0) {
             $player1_wins = $matches->where('winner', $player1->id)->count();

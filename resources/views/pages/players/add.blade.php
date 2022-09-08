@@ -132,24 +132,12 @@
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="number">Won / Lost</label>
-                                    <input
-                                        class="form-control form-control-lg"
-                                        type="text"
-                                        name="won_lost"
-                                        placeholder="4/7"
-                                    />
-                                </div>
-
-                            </div>
-
-                            <div class="col-4">
-                                <div class="form-group">
                                     <label for="titles">Titles</label>
                                     <input
                                         class="form-control form-control-lg"
                                         type="text"
                                         name="titles"
+                                        placeholder="Enter Titles"
                                     />
                                 </div>
 
