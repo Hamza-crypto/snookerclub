@@ -1,13 +1,14 @@
 @foreach($matches as $key => $match)
+    @foreach($match as $key2 => $match2)
     <div class="tour-nam">
 
-        <div class="tounamnam"><h3 class="tour-h3">{{ $key }} - {{ $match[0]->round }}</h3></div>
+        <div class="tounamnam"><h3 class="tour-h3">{{ $key }} - {{ $key2 }} </h3></div>
 
 
         <div class="rightt">
             <p style="padding-top: 1em; padding-left: 0.8em; margin: 0px;" class="text-right">
 
-                <a class="drawbutton" style="color: white;" href="{{ $match[0]->draw_url }}">
+                <a class="drawbutton" style="color: white;" href="{{ $match2[0]->draw_url }}">
                     Draw
                 </a>
 
@@ -35,7 +36,7 @@
             </thead>
             <tbody>
 
-            @foreach($match as $item)
+            @foreach($match2 as $item)
 
                 <tr class="odd">
                     @if ($loop->iteration % 2 == 0)
@@ -68,6 +69,7 @@
             </tbody>
         </table>
     </div>
+    @endforeach
 @endforeach
 
 @if(count($matches) == 0)

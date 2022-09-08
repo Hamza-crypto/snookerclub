@@ -97,6 +97,10 @@ class TournamentController extends Controller
 
         $matches = $matches->groupBy('tournament')->all();
 
+        foreach ($matches as $key => $match){
+            $matches[$key] = $match->groupBy('round')->all();
+        }
+
         return view('pages.results.index', compact('matches'));
     }
 
