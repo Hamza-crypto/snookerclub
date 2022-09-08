@@ -14,7 +14,7 @@
                 @if(count($matches) > 0)
                     @foreach($matches as $match)
                         <tr class="darkwhite">
-                            <td> {{ $match->year->format('Y-m-d') }} </td>
+                            <td> {{ $match->year->format('Y') }} </td>
                             <td> {{ $match->tournament }} </td>
                             <td>{{ $match->rules }}</td>
                             <td>{{ $match->round }}</td>
