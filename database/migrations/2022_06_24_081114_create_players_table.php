@@ -24,6 +24,8 @@ class CreatePlayersTable extends Migration
             $table->integer('professional_since')->nullable();
             $table->text('highest_break')->nullable();
             $table->text('won_lost')->nullable();
+            $table->integer('win')->default(0);
+            $table->integer('lost')->default(0);
             $table->text('titles')->nullable();
             $table->integer('earnings')->nullable();
             $table->text('image1')->nullable();

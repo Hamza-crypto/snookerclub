@@ -36,7 +36,10 @@ class TournamentController extends Controller
             'rules' => $request->rules,
             'round' => $request->round,
             'type' => $request->type,
-            'draw_url' => $request->draw_url
+            'status' => Tournament::KEY_ACTION_CREATED,
+            'draw_url' => $request->draw_url,
+            'score_player_1' => 0,
+            'score_player_2' => 0
         ]);
 
         Session::flash('success', 'Tournament successfully added.');
@@ -55,7 +58,10 @@ class TournamentController extends Controller
             'round' => $request->round,
             'winner' => $request->winner == -100 ? null : $request->winner,
             'score_player_1' => $request->score_player_1,
-            'score_player_2' => $request->score_player_2
+            'score_player_2' => $request->score_player_2,
+            'break_run_player_1' => $request->break_and_run_player_1,
+            'break_run_player_2' => $request->break_and_run_player_2,
+            'status' => $request->status
         ]);
 
         Session::flash('success', 'Successfully updated.');
@@ -103,6 +109,52 @@ class TournamentController extends Controller
 
         return view('pages.results.index', compact('matches'));
     }
+
+    public function results_details(Tournament $match)
+    {
+        $frames = $match->load('frames');
+        $frames = $frames->frames;
+
+        $player_1 = $match->player_1;
+        $player_2 = $match->player_2;
+
+        $players = [$match->player_1, $match->player_2];
+
+        $matches = Tournament::with('frames')
+            ->WhereIn('player_1', $players)
+            ->WhereIn('player_2', $players)
+            ->Where('type', $match->type)
+            ->get();
+
+//        dump($frames->toArray());
+
+        $player1_all_matches = Tournament::Where('type', $match->type)
+            ->where(function ($q) use ($player_1) {
+                $q->where('player_1', $player_1)
+                    ->orWhere('player_2', $player_1);
+            })->get();
+
+        $player2_all_matches = Tournament::Where('type', $match->type)
+            ->where(function ($q) use ($player_2) {
+                $q->where('player_1', $player_2)
+                    ->orWhere('player_2', $player_2);
+            })->get();
+
+        // update time
+        $previous_total_time = (int)$match->total_time;
+
+        $startTime = $match->start_time;
+        $endTime = time();
+
+        $totalDuration = $endTime - $startTime;
+        if($startTime == 0) {
+            $totalDuration = 0;
+        }
+        $match->total_time = $previous_total_time + $totalDuration;
+
+        return view('pages.results.match_detail', get_defined_vars());
+    }
+
 
     public function contact()
     {

@@ -26,7 +26,7 @@ class PlayerController extends Controller
     {
         if ($request->hasFile('image1')) {
             $image1 = $request->file('image1');
-            $image_1_name = time() . '.' . $image1->getClientOriginalExtension();
+            $image_1_name = time() . '_1.' . $image1->getClientOriginalExtension();
             $image1->move(public_path('players'), $image_1_name);
         } else {
             $image_1_name = null;
@@ -34,7 +34,7 @@ class PlayerController extends Controller
 
         if ($request->hasFile('image2')) {
             $image2 = $request->file('image2');
-            $image_2_name = time() . '.' . $image2->getClientOriginalExtension();
+            $image_2_name = time() . '_2.' . $image2->getClientOriginalExtension();
             $image2->move(public_path('players'), $image_2_name);
         } else {
             $image_2_name = null;

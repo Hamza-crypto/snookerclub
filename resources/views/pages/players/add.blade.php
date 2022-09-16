@@ -172,7 +172,7 @@
 
                             </div>
 
-                            <div class="col-6 d-none">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="image">Passport size photo</label>
                                     <input

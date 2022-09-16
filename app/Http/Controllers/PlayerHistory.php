@@ -96,7 +96,6 @@ class PlayerHistory extends Controller
          * Get player's overall wins/lost ratio dynamically
          */
         $player1_all_matches = Tournament::Where('type', $data['type'])
-
             ->where(function ($q) use ($player1) {
                 $q->where('player_1', $player1->id)
                     ->orWhere('player_2', $player1->id);

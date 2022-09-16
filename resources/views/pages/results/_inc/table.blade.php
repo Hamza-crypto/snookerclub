@@ -38,7 +38,7 @@
 
             @foreach($match2 as $item)
 
-                <tr class="odd">
+                <tr class="odd" onclick="window.location='scores/{{ $item->id }}';">
                     @if ($loop->iteration % 2 == 0)
 
                         <td rowspan="1" style="background: #ff2c2c !important;"> {{ $item->year->format('H:i') }}</td>
@@ -64,6 +64,7 @@
                     <td class="text-left"> {{ get_player_name($item->player_2) }} </td>
 
                 </tr>
+
             @endforeach
 
             </tbody>

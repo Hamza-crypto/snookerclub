@@ -7,8 +7,6 @@ use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\PlayerHistory;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
-use App\Models\Tournament;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 
@@ -25,16 +23,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/test', function() {
 
-    $matches = Tournament::WhereIn('player_1', [$player1->id, $player2->id])
-        ->WhereIn('player_2', [$player1->id, $player2->id])
-        ->get();
-    $player1_wins = $matches->where('winner', $player1->id)->count();
-    $player2_wins = $matches->where('winner', $player2->id)->count();
 });
 
 Route::get('/', [PlayerHistory::class, 'index_front'])->name('homepage.front');
 
 Route::get('scores', [TournamentController::class, 'results'])->name('tournament.results');
+Route::get('scores/{match}', [TournamentController::class, 'results_details'])->name('tournament.results.id');
 Route::get('contact', [TournamentController::class, 'contact'])->name('tournament.contact');
 Route::get('about', [TournamentController::class, 'about'])->name('tournament.about');
 Route::post('email', [TournamentController::class, 'send_email'])->name('contact.send_email');

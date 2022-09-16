@@ -45,7 +45,7 @@ $player2 = get_player_name($match->player_2 );
                         <x-alert type="warning">{{ session('warning') }}</x-alert>
                     @endif
 
-                    <form method="post" action="{{ route('matches.update', $match->id) }}" >
+                    <form method="post" action="{{ route('matches.update', $match->id) }}">
                         @csrf
                         @method('PUT')
 
@@ -168,6 +168,37 @@ $player2 = get_player_name($match->player_2 );
                             </div>
 
                         </div>
+                        <div class="row">
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="result">Break & Run player 1</label>
+                                    <input
+                                        class="form-control form-control-lg"
+                                        type="number"
+                                        name="break_and_run_player_1"
+                                        value="{{ $match->break_run_player_1 }}"
+                                        placeholder="Enter Break & Run"
+                                    />
+                                </div>
+
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="result">Break & Run player 2</label>
+                                    <input
+                                        class="form-control form-control-lg"
+                                        type="number"
+                                        name="break_and_run_player_2"
+                                        value="{{ $match->break_run_player_2 }}"
+                                        placeholder="Enter Break & Run"
+                                    />
+                                </div>
+
+                            </div>
+
+                        </div>
 
                         <div class="row">
 
@@ -178,9 +209,26 @@ $player2 = get_player_name($match->player_2 );
                                             class="form-control form-select custom-select select2"
                                             data-toggle="select2">
                                         <option value="-100" selected> Select Winner</option>
-                                        <option value="{{ $match->player_1 }}" @if($match->winner == $match->player_1) selected @endif> {{ $player1 }}</option>
-                                        <option value="{{ $match->player_2 }}" @if($match->winner == $match->player_2) selected @endif> {{ $player2 }}</option>
+                                        <option value="{{ $match->player_1 }}"
+                                                @if($match->winner == $match->player_1) selected @endif> {{ $player1 }}</option>
+                                        <option value="{{ $match->player_2 }}"
+                                                @if($match->winner == $match->player_2) selected @endif> {{ $player2 }}</option>
 
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select name="status" id="status"
+                                            class="form-control form-select custom-select select2"
+                                            data-toggle="select2">
+                                        <option value="-100"> Select Status</option>
+                                        @foreach(App\Models\Tournament::ACTIONS as $key => $value)
+                                            <option value="{{ $key }}" @if($match->status == $key) selected @endif> {{ $value }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -200,9 +248,5 @@ $player2 = get_player_name($match->player_2 );
             </div>
         </div>
     </div>
-
-
-
-
 
 @endsection
