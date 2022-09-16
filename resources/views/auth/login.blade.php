@@ -40,7 +40,6 @@
                             type="password"
                             name="password"
                             placeholder="Enter your password"
-                            value="password"
                         />
                         @error('password')
                         <div class="invalid-feedback">
