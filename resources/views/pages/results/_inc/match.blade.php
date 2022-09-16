@@ -27,7 +27,7 @@
 
                             @if($frame->break_run_player_1)
                                 <div class="green">+1</div>
-                                <div class="brkrun">(Break and Run)</div>
+                                <div class="brkrun left">(Break and Run)</div>
                             @endif
 
                             @if($frame->break_run_player_2)

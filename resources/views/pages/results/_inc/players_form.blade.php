@@ -66,7 +66,7 @@ $player_2_name = get_player_name($match->player_2);
             <div class="w-100 d-flex justify-content-center align-items-center flex-column">
                 @foreach($player2_all_matches as $player2_match)
                     <a href="#play1" class="events col-12 d-flex align-items-center">
-                        <div class="col-1" style="margin-left: 6px;">{{ $player2_match->year->format('Y-m-d') }}</div>
+                        <div class="col-2" style="margin-left: 6px;">{{ $player2_match->year->format('Y-m-d') }}</div>
                         <div class="col-2" style="gap:10px">
                             <!-- <img src="https://www.flashscore.com/res/_fs/build/nirl.dab832b.png" width="18px" height="12px" />
                             <span>NIO</span> -->

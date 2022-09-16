@@ -43,9 +43,16 @@
         </div>
 
         <div class="score d-flex justify-content-center align-items-center flex-column">
-            <div class="startTime">{{ $match->year }}</div>
+            <div class="startTime">{{ $match->year->format('Y-m-d') }} &nbsp; &nbsp;    {{ $match->year->format('H:m') }}</div>
             <span class="scores">{{ $match->score_player_1 }} - {{ $match->score_player_2 }}</span>
-            <span class="status">Finished</span>
+            <span class="status">
+                @if(in_array($match->status, [1,4]) ) LIVE
+                @elseif($match->status==0) NOT STARTED
+                @elseif($match->status==2) Interrupted
+                @elseif($match->status==3) Break
+                @elseif($match->status==5) Finished
+                @endif
+            </span>
         </div>
 
         <div class="d-flex justify-content-center align-items-center">
