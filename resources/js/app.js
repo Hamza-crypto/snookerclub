@@ -16,7 +16,7 @@ window.Vue = require('vue').default;
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
-
+Vue.component('scores', require('./components/scores.vue').default);
 
 
 
@@ -27,5 +27,5 @@ window.Vue = require('vue').default;
  */
 
 const app = new Vue({
-    el: '#app',
+    el: '#app'
 });

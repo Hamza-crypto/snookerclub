@@ -43,11 +43,10 @@
         </div>
 
         <div class="score d-flex justify-content-center align-items-center flex-column">
-            <div class="startTime">{{ $match->year->format('Y-m-d') }} &nbsp; &nbsp;    {{ $match->year->format('H:m') }}</div>
+            <div class="startTime">{{ $match->year->format('Y-m-d') }} &nbsp; &nbsp;    {{ $match->year->format('H:i') }}</div>
             <span class="scores">{{ $match->score_player_1 }} - {{ $match->score_player_2 }}</span>
             <span class="status">
                 @if(in_array($match->status, [1,4]) ) LIVE
-                @elseif($match->status==0) NOT STARTED
                 @elseif($match->status==2) Interrupted
                 @elseif($match->status==3) Break
                 @elseif($match->status==5) Finished
@@ -98,7 +97,7 @@
 
         date.setSeconds(seconds);
         seconds++;
-        document.getElementsByClassName("time")[0].innerText = date.toISOString().substr(14, 5);
+        document.getElementsByClassName("time")[0].innerText = date.toISOString().substr(11, 5);
         if (runTime == '1') {
             setTimeout(showTime, 1000);
         }

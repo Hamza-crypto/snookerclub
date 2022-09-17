@@ -71,6 +71,7 @@ class TournamentController extends Controller
 
     public function destroy(Tournament $match)
     {
+        $match->frames()->delete();
         $match->delete();
         Session::flash('success', 'Tournament deleted successfully.');
         return redirect()->route('matches.index');
@@ -108,6 +109,48 @@ class TournamentController extends Controller
         }
 
         return view('pages.results.index', compact('matches'));
+    }
+    public function results_api()
+    {
+        $data = request()->all();
+
+        if(!isset($data['date'])){
+            $data['date'] = Carbon::today();
+        }
+        if(!isset($data['type'])){
+            $data['type'] = '8-pool';
+        }
+
+        $matches = Tournament::oldest('year')
+            ->whereDay('year', $data['date'])
+            ->where('type', $data['type'])
+            ->get();
+
+        $matches = $matches->groupBy('tournament')->all();
+
+
+        foreach ($matches as $key => $match){
+
+            $match = $match->map(function ($item, $key) {
+                return [
+                    'id' => $item->id,
+                    'player_1' => get_player_name($item->player_1),
+                    'player_1_id' => $item->player_1,
+                    'player_2' => get_player_name($item->player_2),
+                    'player_2_id' => $item->player_2,
+                    'round' => $item->round,
+                    'year' => $item->year->format('H:i'),
+                    'score_player_1' => $item->score_player_1,
+                    'score_player_2' => $item->score_player_2,
+                    'winner' => $item->winner,
+                    'draw_url' => $item->draw_url,
+                ];
+            });
+
+            $matches[$key] = $match->groupBy('round')->all();
+        }
+
+        return response()->json($matches);
     }
 
     public function results_details(Tournament $match)

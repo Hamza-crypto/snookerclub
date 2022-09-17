@@ -24,16 +24,18 @@
 
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-78WVB8NY9B"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
+@if(env('APP_ENV') == 'production')
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-78WVB8NY9B"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-        dataLayer.push(arguments);
-    }
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-    gtag('js', new Date());
+        gtag('js', new Date());
 
-    gtag('config', 'G-78WVB8NY9B');
-</script>
+        gtag('config', 'G-78WVB8NY9B');
+    </script>
+@endif
 

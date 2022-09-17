@@ -22,7 +22,7 @@
             .navbar-brand img {
                 width: 40%;
             }
-            
+
             .tbl-hd-label {
                 font-size: 0.8em !important;
             }
@@ -63,13 +63,16 @@
     <!-- <a class="content-area-button" href="#" style="margin-left: 2px;">Pool Standings</a> -->
 </div>
 
+<div id="app">
+    <scores/>
+</div>
 
-@include('pages.results._inc.table')
+{{--@include('pages.results._inc.table')--}}
 
 @include('includes.footer-front')
 
+<script src="{{ mix('js/app.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
 <script>
     // if(localStorage.getItem('baseUrl') === null) localStorage.setItem('baseUrl', window.location.href);
     var curr = moment();
@@ -164,4 +167,5 @@
 ;
     });
 </script>
+</body>
 </html>
