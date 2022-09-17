@@ -5,36 +5,35 @@
 
                 <template
                     v-if="frame.break_run_player_1 === frame.break_run_player_2 && frame.increment_in_score === 1">
-                    <div class="col-4"></div>
-                    <div class=" red "> {{ frame.score_player_1}} </div>
+                    <div class="green">+1</div>
+                    <div class="red"> 1</div>
                     <div>-</div>
-                    <div class=""> {{ frame.score_player_2 }} </div>
+                    <div> 0</div>
                 </template>
-
 
                 <template
                     v-if="frame.break_run_player_1 === frame.break_run_player_2 && frame.increment_in_score === 2">
                     <div class="col-4"></div>
-                    <div class=""> {{ frame.score_player_1 }} </div>
+                    <div>1</div>
                     <div>-</div>
-                    <div class=" red "> {{ frame.score_player_2 }} </div>
+                    <div class="red">1</div>
+                    <div class="green">+1</div>
                 </template>
-
 
                 <template v-if="frame.break_run_player_1 > frame.break_run_player_2">
                     <div class="green">+1</div>
                     <div class="brkrun left">(Break and Run)</div>
-                    <div class=" red "> {{ frame.score_player_1 }} </div>
+                    <div class=" red "> 3</div>
                     <div>-</div>
-                    <div class=""> {{ frame.score_player_2 }} </div>
+                    <div class="">2</div>
                 </template>
 
 
                 <template v-if="frame.break_run_player_1 < frame.break_run_player_2">
                     <div class="col-4"></div>
-                    <div class=""> {{ frame.score_player_1 }} </div>
+                    <div class=""> 3</div>
                     <div>-</div>
-                    <div class=" red "> {{ frame.score_player_2 }} </div>
+                    <div class=" red ">3</div>
                     <div class="green">+1</div>
                     <div class="brkrun">(Break and Run)</div>
                 </template>
@@ -66,9 +65,7 @@ export default {
             var URL = '/api' + window.location.pathname;
             axios.get(URL)
                 .then((response) => {
-                    this.frames = response.data.frames;
-                    document.getElementsByClassName('scores')[0] .innerHTML = response.data.score;
-                    document.getElementsByClassName('status')[0] .innerHTML = response.data.status;
+                    this.frames = response.data;
                 });
         },
     }
