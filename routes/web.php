@@ -30,6 +30,7 @@ Route::get('/', [PlayerHistory::class, 'index_front'])->name('homepage.front');
 Route::get('scores', [TournamentController::class, 'results'])->name('tournament.results');
 Route::get('api/scores', [TournamentController::class, 'results_api']);
 Route::get('scores/{match}', [TournamentController::class, 'results_details'])->name('tournament.results.id');
+Route::get('api/scores/{match}', [TournamentController::class, 'results_details_frames_api']);
 Route::get('contact', [TournamentController::class, 'contact'])->name('tournament.contact');
 Route::get('about', [TournamentController::class, 'about'])->name('tournament.about');
 Route::post('email', [TournamentController::class, 'send_email'])->name('contact.send_email');

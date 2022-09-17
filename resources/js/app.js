@@ -17,6 +17,7 @@ window.Vue = require('vue').default;
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 Vue.component('scores', require('./components/scores.vue').default);
+Vue.component('frames', require('./components/frames.vue').default);
 
 
 

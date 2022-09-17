@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="600">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,900&amp;display=swap">
     <title>SnookernPool</title>
@@ -80,6 +81,7 @@
         @include('pages.results._inc.h2h')
     </div>
 </div>
+<script src="{{ mix('js/app.js') }}"></script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script>
@@ -98,6 +100,7 @@
         date.setSeconds(seconds);
         seconds++;
         document.getElementsByClassName("time")[0].innerText = date.toISOString().substr(11, 5);
+        console.log(seconds);
         if (runTime == '1') {
             setTimeout(showTime, 1000);
         }

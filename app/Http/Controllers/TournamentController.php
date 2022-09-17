@@ -178,6 +178,31 @@ class TournamentController extends Controller
         return view('pages.results.match_detail', get_defined_vars());
     }
 
+    public function results_details_frames_api(Tournament $match){
+        $frames = $match->load('frames');
+        $frames = $frames->frames;
+
+        $status = '';
+        if(in_array($match->status, [1,4]) ) {
+            $status = 'LIVE';
+        }
+        else if($match->status == 2) {
+            $status = 'Interrupted';
+        }
+        else if($match->status == 3) {
+            $status = 'Break';
+        }
+        else if($match->status == 5) {
+            $status = 'Finished';
+        }
+
+        return response()->json([
+            'frames' => $frames,
+            'score' => $match->score_player_1 . ' - ' . $match->score_player_2,
+            'status' => $status
+        ]);
+    }
+
 
     public function contact()
     {
