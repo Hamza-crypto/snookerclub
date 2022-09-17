@@ -31,11 +31,11 @@
             <li class="breadcrumb-item">{{ $match->tournament }} <a href="#north"> - {{ $match->round }} </a></li>
         </ol>
     </nav>
-    <div class="participants d-flex justify-content-around align-items-center">
+    <div class="participants d-flex justify-content-around">
         <div class="d-flex justify-content-center align-items-center">
             <div class="card participant d-flex justify-content-center align-items-center" style="width: 14rem;">
                 <img class="card-img-top" src="{{ get_img_url($match->player1->image2) }}" alt="Card image cap">
-                <div class="card-body d-flex justify-content-center align-items-center flex-column p-4">
+                <div class="card-body d-flex p-4">
                     <a href="#" class="card-link player-name">{{ get_player_name($match->player_1) }}</a>
                     <!-- <small class="player-status">World Ranking : 99.</small> -->
                 </div>
@@ -57,7 +57,7 @@
         <div class="d-flex justify-content-center align-items-center">
             <div class="card participant d-flex justify-content-center align-items-center" style="width: 14rem;">
                 <img class="card-img-top" src="{{ get_img_url($match->player2->image2) }}" alt="Card image cap">
-                <div class="card-body d-flex justify-content-center align-items-center flex-column">
+                <div class="card-body d-flex">
                     <a href="#" class="card-link player-name">{{ get_player_name($match->player_2) }}</a>
                     <!-- <small class="player-status">World Ranking : 90.</small> -->
                 </div>

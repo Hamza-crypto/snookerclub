@@ -88,27 +88,7 @@ class TournamentController extends Controller
 
     public function results()
     {
-        $data = request()->all();
-
-        if(!isset($data['date'])){
-            $data['date'] = Carbon::today();
-        }
-        if(!isset($data['type'])){
-            $data['type'] = '8-pool';
-        }
-
-        $matches = Tournament::oldest('year')
-            ->whereDay('year', $data['date'])
-            ->where('type', $data['type'])
-            ->get();
-
-        $matches = $matches->groupBy('tournament')->all();
-
-        foreach ($matches as $key => $match){
-            $matches[$key] = $match->groupBy('round')->all();
-        }
-
-        return view('pages.results.index', compact('matches'));
+        return view('pages.results.index');
     }
     public function results_api()
     {

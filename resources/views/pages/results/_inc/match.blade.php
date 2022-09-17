@@ -19,29 +19,42 @@
             <div class="w-100 p-3 d-flex justify-content-center align-items-center">
                 <div class="d-flex justify-content-start align-items-start flex-column scores">
                     @foreach($frames as $frame)
-                        <div class="col-12 d-flex justify-content-start align-items-start scoreHistory">
+                        @if($frame->break_run_player_1 == $frame->break_run_player_2)
+                            @if($frame->increment_in_score == 1)
+                                <div class="col-12 d-flex justify-content-start align-items-start scoreHistory">
 
-                            @if($frame->break_run_player_1 == $frame->break_run_player_2)
-                                <div class="col-4"></div>
+                                    <div class="green">+1</div>
+                                    <div class="red"> {{ $frame->score_player_1 }}</div>
+                                    <div>-</div>
+                                    <div> {{ $frame->score_player_2 }} </div>
+                                </div>
+                            @elseif($frame->increment_in_score == 2)
+                                <div class="col-12 d-flex justify-content-start align-items-start scoreHistory">
+                                    <div class="col-4"></div>
+                                    <div>{{ $frame->score_player_1 }}</div>
+                                    <div>-</div>
+                                    <div class="red">{{ $frame->score_player_2 }}</div>
+                                    <div class="green">+1</div>
+                                </div>
                             @endif
-
-                            @if($frame->break_run_player_1)
+                        @elseif($frame->break_run_player_1 > $frame->break_run_player_2)
+                            <div class="col-12 d-flex justify-content-start align-items-start scoreHistory">
                                 <div class="green">+1</div>
                                 <div class="brkrun left">(Break and Run)</div>
-                            @endif
-
-                            @if($frame->break_run_player_2)
+                                <div class=" red "> {{ $frame->score_player_1 }}</div>
+                                <div>-</div>
+                                <div class="">{{ $frame->score_player_2 }}</div>
+                            </div>
+                        @elseif($frame->break_run_player_1 < $frame->break_run_player_2)
+                            <div class="col-12 d-flex justify-content-start align-items-start scoreHistory">
                                 <div class="col-4"></div>
-                            @endif
-
-                            <div class="@if($frame->increment_in_score == 1) red @endif"> {{ $frame->score_player_1  }} </div>
-                            <div>-</div>
-                            <div class="@if($frame->increment_in_score == 2) red @endif">{{ $frame->score_player_2  }}</div>
-                            @if($frame->break_run_player_2)
+                                <div class=""> {{ $frame->score_player_1 }}</div>
+                                <div>-</div>
+                                <div class=" red ">{{ $frame->score_player_2 }}</div>
                                 <div class="green">+1</div>
                                 <div class="brkrun">(Break and Run)</div>
-                            @endif
-                        </div>
+                            </div>
+                        @endif
                     @endforeach
 
                 </div>
