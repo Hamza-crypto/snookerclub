@@ -63,9 +63,15 @@ class TournamentObserver
         // Time Related stuff
         if ($match->isDirty('status')) {
             if($match->status == Tournament::KEY_ACTION_STARTED) {
+                $dateTime = Carbon::now();
+                $dateTime = $dateTime->setTime(
+                    $dateTime->format('H'),
+                    round($dateTime->format('i') / 5) * 5,
+                    0
+                );
                 Tournament::where('id', $match->id)->update([
                     'start_time' => time(),
-                    'year' => now(),
+                    'year' => $dateTime,
                 ]);
             }
 
