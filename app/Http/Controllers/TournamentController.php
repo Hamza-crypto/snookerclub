@@ -135,29 +135,25 @@ class TournamentController extends Controller
 
     public function results_details(Tournament $match)
     {
-        $frames = $match->load('frames');
-        $frames = $frames->frames;
-
         $player_1 = $match->player_1;
         $player_2 = $match->player_2;
 
         $players = [$match->player_1, $match->player_2];
 
-        $matches = Tournament::with('frames')
-            ->WhereIn('player_1', $players)
+        $matches = Tournament::WhereIn('player_1', $players)
             ->WhereIn('player_2', $players)
             ->Where('type', $match->type)
             ->get();
 
-//        dump($frames->toArray());
-
         $player1_all_matches = Tournament::Where('type', $match->type)
+            ->where('id', '!=', $match->id)
             ->where(function ($q) use ($player_1) {
                 $q->where('player_1', $player_1)
                     ->orWhere('player_2', $player_1);
             })->get();
 
         $player2_all_matches = Tournament::Where('type', $match->type)
+            ->where('id', '!=', $match->id)
             ->where(function ($q) use ($player_2) {
                 $q->where('player_1', $player_2)
                     ->orWhere('player_2', $player_2);
