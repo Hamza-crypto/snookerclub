@@ -90,17 +90,20 @@
     }
     function changeState(){
         var s_val;
+        var month;
         var selectedText = $('#select1 option:selected').text();
         var count = $('#select1 option:selected').val();
         if(selectedText == 'Today'){
             s_val = new Date().getDate();
+            month = new Date().getMonth()+1;
         }
         else{
             let parsed = moment(selectedText, "DD/MM dd");
             s_val = parsed.format('D');
+            month = parsed.format('M');
         }
 
-        url = `${window.location.origin+window.location.pathname}?type=${gameType}&date=${s_val}&count=${count}`;
+        url = `${window.location.origin+window.location.pathname}?type=${gameType}&date=${s_val}&month=${month}&count=${count}`;
         window.history.pushState({ path: url }, '', url);
         window.location.reload();
     }

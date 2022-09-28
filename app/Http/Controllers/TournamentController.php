@@ -94,22 +94,22 @@ class TournamentController extends Controller
     {
         $data = request()->all();
 
-        if(!isset($data['date'])){
-            $data['date'] = Carbon::today();
-        }
-        if(!isset($data['type'])){
+        if (!isset($data['type'])) {
             $data['type'] = '8-pool';
         }
 
-        $matches = Tournament::oldest('year')
-            ->whereDay('year', $data['date'])
-            ->where('type', $data['type'])
-            ->get();
+        $matches = Tournament::oldest('year')->where('type', $data['type']);
+        if (isset($data['date'])) {
+            $matches = $matches->whereMonth('year', $data['month'])->whereDay('year', $data['date']);
+        } else {
+            $matches = $matches->whereDate('year', Carbon::today());
+        }
+
+        $matches = $matches->get();
 
         $matches = $matches->groupBy('tournament')->all();
 
-
-        foreach ($matches as $key => $match){
+        foreach ($matches as $key => $match) {
 
             $match = $match->map(function ($item, $key) {
                 return [
@@ -120,6 +120,7 @@ class TournamentController extends Controller
                     'player_2_id' => $item->player_2,
                     'round' => $item->round,
                     'year' => $item->year->format('H:i'),
+                    'year2' => $item->year->format('d-m-Y'),
                     'score_player_1' => $item->score_player_1,
                     'score_player_2' => $item->score_player_2,
                     'winner' => $item->winner,
@@ -166,7 +167,7 @@ class TournamentController extends Controller
         $endTime = time();
 
         $totalDuration = $endTime - $startTime;
-        if($startTime == 0) {
+        if ($startTime == 0) {
             $totalDuration = 0;
         }
         $match->total_time = $previous_total_time + $totalDuration;
@@ -174,21 +175,19 @@ class TournamentController extends Controller
         return view('pages.results.match_detail', get_defined_vars());
     }
 
-    public function results_details_frames_api(Tournament $match){
+    public function results_details_frames_api(Tournament $match)
+    {
         $frames = $match->load('frames');
         $frames = $frames->frames;
 
         $status = '';
-        if(in_array($match->status, [1,4]) ) {
+        if (in_array($match->status, [1, 4])) {
             $status = 'LIVE';
-        }
-        else if($match->status == 2) {
+        } else if ($match->status == 2) {
             $status = 'Interrupted';
-        }
-        else if($match->status == 3) {
+        } else if ($match->status == 3) {
             $status = 'Break';
-        }
-        else if($match->status == 5) {
+        } else if ($match->status == 5) {
             $status = 'Finished';
         }
 
@@ -204,6 +203,7 @@ class TournamentController extends Controller
     {
         return view('pages.contact.index');
     }
+
     public function about()
     {
         return view('pages.about.index');
