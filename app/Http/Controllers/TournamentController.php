@@ -145,16 +145,23 @@ class TournamentController extends Controller
             ->Where('type', $match->type)
             ->get();
 
-        $player1_all_matches = Tournament::Where('type', $match->type)
-            ->where('id', '!=', $match->id)
-            ->where(function ($q) use ($player_1) {
-                $q->where('player_1', $player_1)
-                    ->orWhere('player_2', $player_1);
-            })->get();
+        $player1_all_matches = Tournament::Where('type', $match->type)->latest('year');
 
-        $player2_all_matches = Tournament::Where('type', $match->type)
-            ->where('id', '!=', $match->id)
-            ->where(function ($q) use ($player_2) {
+        if ($match->status != Tournament::KEY_ACTION_FINISHED) {
+            $player1_all_matches->where('id', '!=', $match->id);
+        }
+
+        $player1_all_matches = $player1_all_matches->where(function ($q) use ($player_1) {
+            $q->where('player_1', $player_1)
+                ->orWhere('player_2', $player_1);
+        })->get();
+
+        $player2_all_matches = Tournament::Where('type', $match->type)->latest('year');
+
+        if ($match->status != Tournament::KEY_ACTION_FINISHED) {
+            $player2_all_matches->where('id', '!=', $match->id);
+        }
+        $player2_all_matches = $player2_all_matches->where(function ($q) use ($player_2) {
                 $q->where('player_1', $player_2)
                     ->orWhere('player_2', $player_2);
             })->get();
