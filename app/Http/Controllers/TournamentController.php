@@ -120,11 +120,10 @@ class TournamentController extends Controller
                     'player_2_id' => $item->player_2,
                     'round' => $item->round,
                     'year' => $item->year->format('H:i'),
-                    'year2' => $item->year->format('d-m-Y'),
-                    'score_player_1' => $item->score_player_1,
-                    'score_player_2' => $item->score_player_2,
+                    'score_player_1' => $item->status == 0 ? '-' : $item->score_player_1,
+                    'score_player_2' => $item->status == 0 ? '-' : $item->score_player_2,
                     'winner' => $item->winner,
-                    'draw_url' => $item->draw_url,
+                    'draw_url' => $item->draw_url
                 ];
             });
 
