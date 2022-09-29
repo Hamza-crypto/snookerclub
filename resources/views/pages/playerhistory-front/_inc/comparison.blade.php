@@ -29,28 +29,33 @@
 
         @if( isset(request()->type) && request()->type == 'snooker')
             <tr>
-                <td class="darkerwhite"> {{ $player1->highest_break }} </td>
-                <td class="darkred">HIGHEST BREAK</td>
-                <td class="darkerwhite"> {{ $player2->highest_break }} </td>
+                <td class="darkwhite"> {{ $player1->highest_break }} </td>
+                <td class="darkerred">HIGHEST BREAK</td>
+                <td class="darkwhite"> {{ $player2->highest_break }} </td>
+            </tr>
+        @else
+            <tr>
+                <td class="darkwhite"> {{ $player1_break_and_run }} </td>
+                <td class="darkerred">BREAK and RUN</td>
+                <td class="darkwhite"> {{ $player2_break_and_run }} </td>
             </tr>
         @endif
 
-
+        <tr>
+            <td class="darkerwhite">{{ $player1_win_loss_ratio }}</td>
+            <td class="darkred">WON/LOST</td>
+            <td class="darkerwhite"> {{ $player2_win_loss_ratio }}</td>
+        </tr>
 
         <tr>
-            <td class="darkwhite">{{ $player1_win_loss_ratio }}</td>
-            <td class="darkerred">WON/LOST</td>
-            <td class="darkwhite"> {{ $player2_win_loss_ratio }}</td>
+            <td class="darkwhite"> {{ $player1->earnings }} MAD </td>
+            <td class="darkerred">TOTAL EARNINGS</td>
+            <td class="darkwhite"> {{ $player2->earnings }} MAD</td>
         </tr>
         <tr>
             <td class="darkerwhite"> {{ $player1->titles }} </td>
             <td class="darkred">TITLES</td>
             <td class="darkerwhite"> {{ $player2->titles }} </td>
-        </tr>
-        <tr>
-            <td class="darkwhite"> {{ $player1->earnings }} MAD </td>
-            <td class="darkerred">TOTAL EARNINGS</td>
-            <td class="darkwhite"> {{ $player2->earnings }} MAD</td>
         </tr>
     </table>
 </section>

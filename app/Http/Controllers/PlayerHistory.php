@@ -97,22 +97,15 @@ class PlayerHistory extends Controller
         /**
          * Get player's overall wins/lost ratio dynamically
          */
-        $player1_all_matches = Tournament::Where('type', $data['type'])
-            ->where(function ($q) use ($player1) {
-                $q->where('player_1', $player1->id)
-                    ->orWhere('player_2', $player1->id);
-            })->get();
+        $player1_all_matches = $this->getPlayerMatches($data['type'], $player1);
         $player1_all_wins = $player1_all_matches->where('winner', $player1->id)->count();
         $player1_win_loss_ratio =sprintf('%d / %d', $player1_all_wins , $player1_all_matches->count() - $player1_all_wins);
+        $player1_break_and_run = $player1_all_matches->sum('break_run_player_1');
 
-        $player2_all_matches = Tournament::Where('type', $data['type'])
-            ->whereNotNull('winner')
-            ->where(function ($q) use ($player2) {
-                $q->where('player_1', $player2->id)
-                    ->orWhere('player_2', $player2->id);
-            })->get();
+        $player2_all_matches = $this->getPlayerMatches($data['type'], $player2);
         $player2_all_wins = $player2_all_matches->where('winner', $player2->id)->count();
         $player2_win_loss_ratio =sprintf('%d / %d', $player2_all_wins , $player2_all_matches->count() - $player2_all_wins);
+        $player2_break_and_run = $player2_all_matches->sum('break_run_player_2');
 
         /**
          * wins/lost ratio dynamically end
@@ -141,6 +134,15 @@ class PlayerHistory extends Controller
 //        dd($graph_data['labels'], $player1_win_percentage, $player2_win_percentage);
 
         return view('pages.playerhistory-front.index', get_defined_vars(), $graph_data);
+    }
+
+    function getPlayerMatches($type, $player){
+        return Tournament::Where('type', $type)
+            ->whereNotNull('winner')
+            ->where(function ($q) use ($player) {
+                $q->where('player_1', $player->id)
+                    ->orWhere('player_2', $player->id);
+            })->get();
     }
 
 }
