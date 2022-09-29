@@ -69,10 +69,12 @@ class PlayerHistory extends Controller
         $player1_win_percentage = 0;
         $player2_win_percentage = 0;
 
+        if(!isset($data['type'])) {
+            $data['type'] = '8-pool';
+        }
         if (!isset($data['player1']) || !isset($data['player2'])) {
             $player1 = Player::where('highlighted', 1)->first();
             $player2 = Player::where('highlighted', 1)->skip(1)->take(1)->first();
-            $data['type'] = '8-pool';
 
         } else {
             $player1 = Player::where('name', 'like', '%' . $data['player1'] . '%')->first();
