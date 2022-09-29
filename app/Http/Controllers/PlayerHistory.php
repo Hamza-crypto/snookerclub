@@ -100,12 +100,16 @@ class PlayerHistory extends Controller
         $player1_all_matches = $this->getPlayerMatches($data['type'], $player1);
         $player1_all_wins = $player1_all_matches->where('winner', $player1->id)->count();
         $player1_win_loss_ratio =sprintf('%d / %d', $player1_all_wins , $player1_all_matches->count() - $player1_all_wins);
-        $player1_break_and_run = $player1_all_matches->sum('break_run_player_1');
+        $player1_break_and_run = $player1_all_matches->sum(function ($match) use ($player1) {
+            return $match->player_1 == $player1->id ? $match->break_run_player_1 : $match->break_run_player_2;
+        });
 
         $player2_all_matches = $this->getPlayerMatches($data['type'], $player2);
         $player2_all_wins = $player2_all_matches->where('winner', $player2->id)->count();
         $player2_win_loss_ratio =sprintf('%d / %d', $player2_all_wins , $player2_all_matches->count() - $player2_all_wins);
-        $player2_break_and_run = $player2_all_matches->sum('break_run_player_2');
+        $player2_break_and_run = $player2_all_matches->sum(function ($match) use ($player2) {
+            return $match->player_1 == $player2->id ? $match->break_run_player_1 : $match->break_run_player_2;
+        });
 
         /**
          * wins/lost ratio dynamically end
