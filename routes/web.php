@@ -35,6 +35,9 @@ Route::get('contact', [TournamentController::class, 'contact'])->name('tournamen
 Route::get('about', [TournamentController::class, 'about'])->name('tournament.about');
 Route::post('email', [TournamentController::class, 'send_email'])->name('contact.send_email');
 
+//Ranking
+Route::get('stats', [TournamentController::class, 'stats'])->name('tournament.stats');
+
 Route::get('results2', [TournamentController::class, 'results2'])->name('tournament.results2');
 
 Route::group(['middleware' => ['auth']], function () {

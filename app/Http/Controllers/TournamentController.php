@@ -223,4 +223,160 @@ class TournamentController extends Controller
         $submit = true;
         return view('pages.contact.index', compact('submit'));
     }
+
+    public function stats()
+    {
+        $type = request()->type;
+        $filter = request()->filter;
+
+        if (is_null($filter)) {
+            if ($type == '8-pool') {
+                $filter = 'Average-Break-Run';
+            } else {
+                $filter = 'Highest-Break';
+            }
+        }
+
+        switch ($filter) {
+            case 'Average-Break-Run':
+                $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($item, $key) use ($type) {
+                    $player_all_matches = $this->getPlayerMatches( $type, $item );
+                    $player_total_matches = $player_all_matches->count();
+                    $player_break_and_run = $player_all_matches->sum(function ($match) use ($item) {
+                        return $match->player_1 == $item->id ? $match->break_run_player_1 : $match->break_run_player_2;
+                    });
+
+                    return [
+                        'name' => $item->name,
+                        'value' => $player_total_matches == 0 ? 0 : round($player_break_and_run / $player_total_matches , 1)
+                    ];
+                });
+                $data = $data->sortByDesc('value')->values()->all();
+                break;
+            case 'Break-Run':
+                $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($item, $key) use ($type) {
+                    $player_all_matches = $this->getPlayerMatches( $type, $item );
+                    $player_break_and_run = $player_all_matches->sum(function ($match) use ($item) {
+                        return $match->player_1 == $item->id ? $match->break_run_player_1 : $match->break_run_player_2;
+                    });
+
+                    return [
+                        'name' => $item->name,
+                        'value' => $player_break_and_run
+                    ];
+                });
+                $data = $data->sortByDesc('value')->values()->all();
+                break;
+            case 'Highest-Break':
+                $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($item, $key) use ($type) {
+                    $player_all_matches = $this->getPlayerMatches( $type, $item );
+                    $player_break_and_run = $player_all_matches->sum(function ($match) use ($item) {
+                        return $match->player_1 == $item->id ? $match->break_run_player_1 : $match->break_run_player_2;
+                    });
+
+                    return [
+                        'name' => $item->name,
+                        'value' => $player_break_and_run
+                    ];
+                });
+                $data = $data->sortByDesc('value')->values()->all();
+                break;
+            case 'Total-Frames-Won':
+                $all_matches = Tournament::where('type', $type)->get();
+                $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($player, $key) use ($all_matches) {
+
+                    $frames_won = $all_matches->sum(function ($match) use ($player) {
+                        if($match->player_1 == $player->id){
+                            return $match->score_player_1;
+                        }
+                        elseif ($match->player_2 == $player->id) {
+                            return $match->score_player_2;
+                        }
+                        else {
+                            return 0;
+                        }
+                    });
+
+                    return [
+                        'name' => $player->name,
+                        'value' => $frames_won
+                    ];
+                });
+                $data = $data->sortByDesc('value')->values()->all();
+                break;
+            case 'Total-Matches-Won':
+                $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($item, $key) use ($type) {
+                    return [
+                        'name' => $item->name,
+                        'value' => Tournament::where('type', $type)
+                            ->where('winner', $item->id)
+                            ->count()
+                    ];
+                });
+                $data = $data->sortByDesc('value')->values()->all();
+                break;
+            case 'Winning-Percentage':
+                $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($item, $key) use ($type)  {
+                    $player_all_matches = $this->getPlayerMatches( $type, $item );
+                    $player_total_matches = $player_all_matches->count();
+                    $player_all_wins = $player_all_matches->where('winner', $item->id )->count();
+
+                    return [
+                        'name' => $item->name,
+                        'value' => $player_total_matches == 0 ? 0 . '%' : round($player_all_wins / $player_total_matches * 100, 2) . '%'
+                    ];
+                });
+                $data = $data->sortByDesc('value')->values()->all();
+                break;
+            case 'Winning-Streak':
+
+                $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($item, $key) use ($type) {
+                    $player_all_matches = $this->getPlayerMatches( $type, $item );
+
+                    $player_winning_streak = 0;
+                    $player_winning_streak_temp = 0;
+                    foreach ($player_all_matches as $match) {
+                        if($match->winner == $item->id){
+                            $player_winning_streak_temp++;
+                        }
+                        else {
+                            $player_winning_streak_temp = 0;
+                        }
+
+                        if($player_winning_streak_temp > $player_winning_streak){
+                            $player_winning_streak = $player_winning_streak_temp;
+                        }
+                    }
+
+                    return [
+                        'name' => $item->name,
+                        'value' => $player_winning_streak
+                    ];
+                });
+                $data = $data->sortByDesc('value')->values()->all();
+                break;
+            case 'Total-Prize-Money':
+                $data = Player::latest('earnings')->get()->map(function ($item, $key) {
+                    return [
+                        'name' => $item->name,
+                        'value' => $item->earnings . ' MAD',
+                    ];
+                });
+                break;
+        }
+
+        return view('pages.stats.index', compact('data'));
+    }
+
+    function getPlayerMatches( $type , $player ){
+
+            return Tournament::where('type', $type)
+                ->whereNotNull('winner')
+                ->where(function ($q) use ($player) {
+                    $q->where('player_1', $player->id)
+                        ->orWhere('player_2', $player->id);
+                })->get();
+
+
+    }
 }
