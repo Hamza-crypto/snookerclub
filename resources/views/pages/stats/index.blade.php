@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link type="text/css" rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,900&amp;display=swap">
-    <title>Rankings | snookerNpool</title>
-
+    <title>Stats | SnookernPool</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/front') }}/images/logo.jpeg" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/b479505538.js" crossorigin="anonymous"></script>

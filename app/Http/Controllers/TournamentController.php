@@ -248,7 +248,7 @@ class TournamentController extends Controller
 
                     return [
                         'name' => $item->name,
-                        'value' => $player_total_matches == 0 ? 0 : round($player_break_and_run / $player_total_matches , 1)
+                        'value' => $player_total_matches == 0 ? 0 : round($player_break_and_run / $player_total_matches , 2)
                     ];
                 });
                 $data = $data->sortByDesc('value')->values()->all();
