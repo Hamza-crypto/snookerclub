@@ -61,8 +61,8 @@ class TournamentObserver
         }
 
         // Time Related stuff
-        if ($match->isDirty('status') || $match->isDirty('winner')) {
-            if($match->status == Tournament::KEY_ACTION_STARTED) {
+        if ($match->isDirty('status')) {
+            if ($match->status == Tournament::KEY_ACTION_STARTED) {
                 $dateTime = Carbon::now();
                 $dateTime = $dateTime->setTime(
                     $dateTime->format('H'),
@@ -75,14 +75,14 @@ class TournamentObserver
                 ]);
             }
 
-            if(in_array($match->status, [Tournament::KEY_ACTION_INTERRUPTED, Tournament::KEY_ACTION_BREAK])  ) {
+            if (in_array($match->status, [Tournament::KEY_ACTION_INTERRUPTED, Tournament::KEY_ACTION_BREAK])) {
                 $previous_total_time = (int)$match->total_time;
 
                 $startTime = $match->start_time;
                 $endTime = time();
 
                 $totalDuration = $endTime - $startTime;
-                if($startTime == 0) {
+                if ($startTime == 0) {
                     $totalDuration = 0;
                 }
 
@@ -92,38 +92,48 @@ class TournamentObserver
                 ]);
             }
 
-            if($match->status == Tournament::KEY_ACTION_RESUMED) {
+            if ($match->status == Tournament::KEY_ACTION_RESUMED) {
                 Tournament::where('id', $match->id)->update([
                     'start_time' => time()
                 ]);
             }
 
-            if($match->status == Tournament::KEY_ACTION_FINISHED || $match->isDirty('winner')) {
+            if ($match->status == Tournament::KEY_ACTION_FINISHED) {
                 $previous_total_time = (int)$match->total_time;
 
                 $startTime = $match->start_time;
                 $endTime = time();
 
                 $totalDuration = $endTime - $startTime;
-                if($startTime == 0) {
+                if ($startTime == 0) {
                     $totalDuration = 0;
                 }
 
-                if($match->isDirty('winner')){
-                    Tournament::where('id', $match->id)->update([
-                        'total_time' => $previous_total_time + $totalDuration,
-                        'start_time' => 0,
-                        'status' => Tournament::KEY_ACTION_FINISHED,
-                    ]);
-                }
-                else{
-                    Tournament::where('id', $match->id)->update([
-                        'total_time' => $previous_total_time + $totalDuration,
-                        'start_time' => 0
-                    ]);
-                }
+                Tournament::where('id', $match->id)->update([
+                    'total_time' => $previous_total_time + $totalDuration,
+                    'start_time' => 0
+                ]);
+
 
             }
+        }
+
+        if ($match->isDirty('winner')) {
+            $previous_total_time = (int)$match->total_time;
+
+            $startTime = $match->start_time;
+            $endTime = time();
+
+            $totalDuration = $endTime - $startTime;
+            if ($startTime == 0) {
+                $totalDuration = 0;
+            }
+
+            Tournament::where('id', $match->id)->update([
+                'total_time' => $previous_total_time + $totalDuration,
+                'start_time' => 0,
+                'status' => Tournament::KEY_ACTION_FINISHED,
+            ]);
         }
 
     }
