@@ -56,6 +56,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::impersonate();
 
     Route::resource('matches', TournamentController::class);
+    Route::get('tournaments/create', [TournamentController::class, 'create_tournament'])->name('tournaments.create_tournament');
+    Route::get('api/players', [TournamentController::class, 'get_players'])->name('tournaments.get_players');
+    Route::post('tournaments/create', [TournamentController::class, 'store_tournament'])->name('tournaments.store_tournament');
 
     Route::group(
         [

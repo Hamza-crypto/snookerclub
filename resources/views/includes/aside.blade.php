@@ -57,6 +57,13 @@
                         <span class="align-middle">Add New Match</span>
                     </a>
                 </li>
+
+                <li class="sidebar-item {{ request()->is('tournaments/create') ? 'active' : '' }}">
+                    <a class="sidebar-link" href="{{ route('tournaments.create_tournament') }}">
+                        <i class="align-middle" data-feather="plus-square"></i>
+                        <span class="align-middle">Add New Tournament</span>
+                    </a>
+                </li>
             @endif
 
             <li class="sidebar-item {{ request()->is('results') ? 'active' : '' }}">

@@ -379,4 +379,40 @@ class TournamentController extends Controller
 
 
     }
+
+    public function  get_players()
+    {
+        $players = Player::select(['id', 'name'])->latest()->get();
+        return response()->json($players);
+    }
+
+    public function  create_tournament()
+    {
+        $players = Player::latest()->get();
+        return view('pages.matches.tournament.add', compact('players'));
+    }
+    public function  store_tournament()
+    {
+        $player1 = request('player1');
+        $player2 = request('player2');
+
+        for($i=0; $i<request('number_of_players'); $i++){
+
+            Tournament::create([
+                'player_1' => $player1[$i],
+                'player_2' => $player2[$i],
+                'tournament' => request('title'),
+                'rules' => request('rules'),
+
+                'type' => 'snooker',
+                'status' => Tournament::KEY_ACTION_CREATED,
+
+                'score_player_1' => 0,
+                'score_player_2' => 0
+            ]);
+
+        }
+
+        return response()->json(request()->all());
+    }
 }

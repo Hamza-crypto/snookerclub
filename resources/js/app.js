@@ -18,6 +18,7 @@ window.Vue = require('vue').default;
  */
 Vue.component('scores', require('./components/scores.vue').default);
 Vue.component('frames', require('./components/frames.vue').default);
+Vue.component('tournaments', require('./components/tournaments.vue').default);
 
 
 
