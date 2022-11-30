@@ -20,7 +20,22 @@ function get_player_name($id ) {
         return $player['name'];
     }
     catch (\Exception $e) {
-        return "---";
+        return "";
+    }
+
+}
+
+function get_player_name_draw($id ) {
+
+    $player = \App\Models\Player::select('name')
+        ->where('id',$id )
+        ->first();
+
+    try {
+        return $player['name'];
+    }
+    catch (\Exception $e) {
+        return "Bye";
     }
 
 }

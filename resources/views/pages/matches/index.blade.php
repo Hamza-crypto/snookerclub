@@ -63,11 +63,11 @@
 
                                 <td>{{ get_player_name($match->player_2) }}</td>
 
-                                <td>{{ isset($match->year) ?? $match->year->format('Y') }}</td>
+                                <td>{{ isset($match->year) ? $match->year->format('Y') : '-' }}</td>
 
                                 <td>{{ $match->rules }}</td>
 
-                                <td>{{ $match->rounds }}</td>
+                                <td>{{ $match->round }}</td>
 
                                 <td>{{ get_player_name($match->winner) }}</td>
 

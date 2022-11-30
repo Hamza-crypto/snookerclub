@@ -11,7 +11,7 @@
                     <div class="rightt">
                         <p style="padding-top: 1em; padding-left: 0.8em; margin: 0px;" class="text-right">
 
-                            <a class="drawbutton" style="color: white;" :href="match2[0].draw_url ">
+                            <a class="drawbutton" style="color: white;" :href="'draw/' + match2[0].draw_url ">
                                 Draw
                             </a>
 

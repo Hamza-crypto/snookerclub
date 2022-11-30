@@ -39,7 +39,7 @@
                                 </span>
                                 <span class="badge badge-soft-success mr-2">
                                     <i class="mdi mdi-arrow-bottom-right"></i>
-                                    {{ \App\Models\User::where('role', 'assistant')->count()  }} Assistants
+                                    {{ \App\Models\User::where('role', 'moderator')->count()  }} Moderator
                                 </span>
 
                                 <span class="badge badge-soft-success mr-2">

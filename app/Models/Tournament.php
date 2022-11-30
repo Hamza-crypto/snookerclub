@@ -24,7 +24,8 @@ class Tournament extends Model
         'score_player_1',
         'score_player_2',
         'break_run_player_1',
-        'break_run_player_2'
+        'break_run_player_2',
+        'level'
     ];
 
     protected $casts = [

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Tournament;
 use App\Models\Player;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class TournamentController extends Controller
@@ -14,7 +14,7 @@ class TournamentController extends Controller
 
     public function index()
     {
-        $matches = Tournament::latest()->get();
+        $matches = Tournament::latest()->where('player_2', '!=', 0)->get();
         return view('pages.matches.index', compact('matches'));
     }
 
@@ -55,6 +55,7 @@ class TournamentController extends Controller
     {
         //update match
         $match->update([
+            'year' => $request->year,
             'round' => $request->round,
             'winner' => $request->winner == -100 ? null : $request->winner,
             'score_player_1' => $request->score_player_1,
@@ -90,6 +91,7 @@ class TournamentController extends Controller
     {
         return view('pages.results.index');
     }
+
     public function results_api()
     {
         $data = request()->all();
@@ -98,7 +100,7 @@ class TournamentController extends Controller
             $data['type'] = '8-pool';
         }
 
-        $matches = Tournament::oldest('year')->where('type', $data['type']);
+        $matches = Tournament::oldest('year')->where('type', $data['type'])->where('player_2', '!=', 0);
         if (isset($data['date'])) {
             $matches = $matches->whereMonth('year', $data['month'])->whereDay('year', $data['date']);
         } else {
@@ -123,7 +125,7 @@ class TournamentController extends Controller
                     'score_player_1' => $item->status == 0 ? '-' : $item->score_player_1,
                     'score_player_2' => $item->status == 0 ? '-' : $item->score_player_2,
                     'winner' => $item->winner,
-                    'draw_url' => $item->draw_url
+                    'draw_url' => $item->draw_url ?? $item->tournament,
                 ];
             });
 
@@ -162,9 +164,9 @@ class TournamentController extends Controller
             $player2_all_matches->where('id', '!=', $match->id);
         }
         $player2_all_matches = $player2_all_matches->where(function ($q) use ($player_2) {
-                $q->where('player_1', $player_2)
-                    ->orWhere('player_2', $player_2);
-            })->get();
+            $q->where('player_1', $player_2)
+                ->orWhere('player_2', $player_2);
+        })->get();
 
         // update time
         $previous_total_time = (int)$match->total_time;
@@ -240,7 +242,7 @@ class TournamentController extends Controller
         switch ($filter) {
             case 'Average-Break-Run':
                 $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($item, $key) use ($type) {
-                    $player_all_matches = $this->getPlayerMatches( $type, $item );
+                    $player_all_matches = $this->getPlayerMatches($type, $item);
                     $player_total_matches = $player_all_matches->count();
                     $player_break_and_run = $player_all_matches->sum(function ($match) use ($item) {
                         return $match->player_1 == $item->id ? $match->break_run_player_1 : $match->break_run_player_2;
@@ -248,14 +250,14 @@ class TournamentController extends Controller
 
                     return [
                         'name' => $item->name,
-                        'value' => $player_total_matches == 0 ? 0 : round($player_break_and_run / $player_total_matches , 2)
+                        'value' => $player_total_matches == 0 ? 0 : round($player_break_and_run / $player_total_matches, 2)
                     ];
                 });
                 $data = $data->sortByDesc('value')->values()->all();
                 break;
             case 'Break-Run':
                 $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($item, $key) use ($type) {
-                    $player_all_matches = $this->getPlayerMatches( $type, $item );
+                    $player_all_matches = $this->getPlayerMatches($type, $item);
                     $player_break_and_run = $player_all_matches->sum(function ($match) use ($item) {
                         return $match->player_1 == $item->id ? $match->break_run_player_1 : $match->break_run_player_2;
                     });
@@ -269,7 +271,7 @@ class TournamentController extends Controller
                 break;
             case 'Highest-Break':
                 $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($item, $key) use ($type) {
-                    $player_all_matches = $this->getPlayerMatches( $type, $item );
+                    $player_all_matches = $this->getPlayerMatches($type, $item);
                     $player_break_and_run = $player_all_matches->sum(function ($match) use ($item) {
                         return $match->player_1 == $item->id ? $match->break_run_player_1 : $match->break_run_player_2;
                     });
@@ -286,13 +288,11 @@ class TournamentController extends Controller
                 $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($player, $key) use ($all_matches) {
 
                     $frames_won = $all_matches->sum(function ($match) use ($player) {
-                        if($match->player_1 == $player->id){
+                        if ($match->player_1 == $player->id) {
                             return $match->score_player_1;
-                        }
-                        elseif ($match->player_2 == $player->id) {
+                        } elseif ($match->player_2 == $player->id) {
                             return $match->score_player_2;
-                        }
-                        else {
+                        } else {
                             return 0;
                         }
                     });
@@ -316,10 +316,10 @@ class TournamentController extends Controller
                 $data = $data->sortByDesc('value')->values()->all();
                 break;
             case 'Winning-Percentage':
-                $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($item, $key) use ($type)  {
-                    $player_all_matches = $this->getPlayerMatches( $type, $item );
+                $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($item, $key) use ($type) {
+                    $player_all_matches = $this->getPlayerMatches($type, $item);
                     $player_total_matches = $player_all_matches->count();
-                    $player_all_wins = $player_all_matches->where('winner', $item->id )->count();
+                    $player_all_wins = $player_all_matches->where('winner', $item->id)->count();
 
                     return [
                         'name' => $item->name,
@@ -331,19 +331,18 @@ class TournamentController extends Controller
             case 'Winning-Streak':
 
                 $data = Player::select(['id', 'name'])->toBase()->get()->map(function ($item, $key) use ($type) {
-                    $player_all_matches = $this->getPlayerMatches( $type, $item );
+                    $player_all_matches = $this->getPlayerMatches($type, $item);
 
                     $player_winning_streak = 0;
                     $player_winning_streak_temp = 0;
                     foreach ($player_all_matches as $match) {
-                        if($match->winner == $item->id){
+                        if ($match->winner == $item->id) {
                             $player_winning_streak_temp++;
-                        }
-                        else {
+                        } else {
                             $player_winning_streak_temp = 0;
                         }
 
-                        if($player_winning_streak_temp > $player_winning_streak){
+                        if ($player_winning_streak_temp > $player_winning_streak) {
                             $player_winning_streak = $player_winning_streak_temp;
                         }
                     }
@@ -368,51 +367,262 @@ class TournamentController extends Controller
         return view('pages.stats.index', compact('data'));
     }
 
-    function getPlayerMatches( $type , $player ){
+    function getPlayerMatches($type, $player)
+    {
 
-            return Tournament::where('type', $type)
-                ->whereNotNull('winner')
-                ->where(function ($q) use ($player) {
-                    $q->where('player_1', $player->id)
-                        ->orWhere('player_2', $player->id);
-                })->get();
+        return Tournament::where('type', $type)
+            ->whereNotNull('winner')
+            ->where(function ($q) use ($player) {
+                $q->where('player_1', $player->id)
+                    ->orWhere('player_2', $player->id);
+            })->get();
 
 
     }
 
-    public function  get_players()
+    public function get_players()
     {
         $players = Player::select(['id', 'name'])->latest()->get();
         return response()->json($players);
     }
 
-    public function  create_tournament()
+    public function create_tournament()
     {
         $players = Player::latest()->get();
         return view('pages.matches.tournament.add', compact('players'));
     }
-    public function  store_tournament()
+
+    public function store_tournament()
     {
         $player1 = request('player1');
         $player2 = request('player2');
+        $no_of_players = request('number_of_players');
+        $type = request('type');
 
-        for($i=0; $i<request('number_of_players'); $i++){
+        $round = $this->get_round($no_of_players);
+
+        for ($i = 0; $i < request('total_matches'); $i++) {
 
             Tournament::create([
                 'player_1' => $player1[$i],
                 'player_2' => $player2[$i],
                 'tournament' => request('title'),
                 'rules' => request('rules'),
-
-                'type' => 'snooker',
+                'year' => now(),
+                'type' => $type,
                 'status' => Tournament::KEY_ACTION_CREATED,
+                'round' => $round,
 
                 'score_player_1' => 0,
-                'score_player_2' => 0
+                'score_player_2' => 0,
+                'level' => 1
             ]);
 
         }
 
         return response()->json(request()->all());
+    }
+
+
+
+    public function tournament_draw($tournament_title)
+    {
+        //First
+        $tournaments = Tournament::where('tournament', $tournament_title)->where('level', 1)->get();
+
+        $first_tournament = $tournaments->first();
+
+        $output = $this->get_mapped_tournaments($tournaments, [] ); //[mapped, winners]
+//        dd($tournaments, $output[0]);
+        $tournaments = $output[0];
+        $tournaments_second_round_winners = $output[1];
+
+        if($tournaments_second_round_winners){
+            //Second
+            $second_round = $this->pre_processing_array_for_further_tournaments($tournaments_second_round_winners);
+            $second_round[0]['round'] = $this->get_round(count($second_round) * 2);;
+
+            $pending_tournaments = $tournaments->where('player_2', '!=', '0')->where('winner', null)->count();
+            if($pending_tournaments == 0){ //winner is selected for all the tournaments
+                $this->create_further_tournaments_based_on_previous_winners($second_round, $first_tournament, 2);
+            }
+
+            $second_round_tournaments = Tournament::where('tournament', $tournament_title)->where('level', 2)->get();
+            if(count($second_round_tournaments) > 0){
+                $output = $this->get_mapped_tournaments($second_round_tournaments, [] );
+                $second_round = $output[0];
+
+                $tournaments_third_round_winners = $output[1];
+            }
+        }
+        else{
+            $second_round = [];
+        }
+
+
+
+        if(isset($tournaments_third_round_winners)){
+            //Third
+            $third_round = $this->pre_processing_array_for_further_tournaments($tournaments_third_round_winners);
+
+            $pending_tournaments = $second_round_tournaments->where('winner', null)->count();
+            if($pending_tournaments == 0){
+                $output = $this->create_further_tournaments_based_on_previous_winners($third_round, $first_tournament, 3);
+            }
+
+            $third_round_tournaments = Tournament::where('tournament', $tournament_title)->where('level', 3)->get();
+            if($third_round_tournaments){
+                $output = $this->get_mapped_tournaments($third_round_tournaments, [] );
+                $third_round = $output[0];
+                $tournaments_fourth_round_winners = $output[1];
+            }
+        }
+        else{
+            $third_round = [];
+        }
+
+
+
+
+        if(isset($tournaments_fourth_round_winners)){
+            //Fourth
+            $fourth_round = $this->pre_processing_array_for_further_tournaments($tournaments_fourth_round_winners);
+
+            $pending_tournaments = $third_round_tournaments->where('winner', null)->count();
+            if($pending_tournaments == 0){
+                $output = $this->create_further_tournaments_based_on_previous_winners($fourth_round, $first_tournament, 4);
+            }
+
+            $fourth_round_tournaments = Tournament::where('tournament', $tournament_title)->where('level', 4)->get();
+            if($fourth_round_tournaments){
+                $output = $this->get_mapped_tournaments($fourth_round_tournaments, [] );
+                $fourth_round = $output[0];
+                $tournaments_fifth_round_winners = $output[1];
+            }
+        }
+        else{
+            $fourth_round = [];
+        }
+
+
+
+        if(isset($tournaments_fifth_round_winners)){
+            //Fifth
+            $fifth_round = $this->pre_processing_array_for_further_tournaments($tournaments_fifth_round_winners);
+
+            $pending_tournaments = $fourth_round_tournaments->where('winner', null)->count();
+            if($pending_tournaments == 0){
+                $output = $this->create_further_tournaments_based_on_previous_winners($fifth_round, $first_tournament, 5);
+            }
+
+            $fifth_round_tournaments = Tournament::where('tournament', $tournament_title)->where('level', 5)->get();
+            if($fifth_round_tournaments){
+                $output = $this->get_mapped_tournaments($fifth_round_tournaments, [] );
+                $fifth_round = $output[0];
+                $tournaments_fifth_round_winners = $output[1];
+            }
+        }
+        else{
+            $fifth_round = [];
+        }
+
+        return view('pages.matches.tournament.tournament-draw', get_defined_vars());
+    }
+
+    function get_mapped_tournaments($tournaments, $second_array)
+    {
+        $tournaments = $tournaments->map(function ($item, $key) use (&$second_array) {
+            $winner = $item->player_2 == 0 ? $item->player_1 : $item->winner;
+            $second_array[] = $winner;
+            return [
+                'id' => $item->id,
+                'player_1' => get_player_name_draw($item->player_1),
+                'player_1_id' => $item->player_1,
+
+                'player_2' => get_player_name_draw($item->player_2),
+                'player_2_id' => $item->player_2,
+
+                'score_player_1' => $item->status == Tournament::ACTION_CREATED ? '-' : $item->score_player_1,
+                'score_player_2' => $item->player_2 == 0 ? '-' : ($item->status == Tournament::ACTION_CREATED ? '-' : $item->score_player_2),
+                'winner' => $winner,
+                'round' => $item->round,
+            ];
+        });
+
+
+         return [$tournaments, $second_array];
+    }
+
+    function create_further_tournaments_based_on_previous_winners($second_round, $first_tournament, $level){
+
+        $round = $this->get_round(count($second_round) * 2);
+        foreach ($second_round as $tournament){
+
+            Tournament::firstOrCreate(
+                [
+                    'player_1' => $tournament['player_1_id'],
+                    'player_2' => $tournament['player_2_id'],
+                    'tournament' => $first_tournament->tournament
+                ],
+                [
+                    'player_1' => $tournament['player_1_id'],
+                    'player_2' => $tournament['player_2_id'],
+                    'tournament' => $first_tournament->tournament,
+                    'rules' => $first_tournament->rules,
+                    'year' => now(),
+                    'type' => $first_tournament->type,
+                    'status' => Tournament::KEY_ACTION_CREATED,
+                    'round' => $round,
+                    'score_player_1' => 0,
+                    'score_player_2' => 0,
+                    'level' => $level
+                ]);
+        }
+    }
+
+    function pre_processing_array_for_further_tournaments($tournaments_third_round_winners){
+        $next_round = [];
+        $temp_array = [];
+        foreach ($tournaments_third_round_winners as $key => $tournament) {
+
+            $temp_array['winner'] = null;
+            if ($key % 2 == 0) {
+                $temp_array['player_1'] = get_player_name($tournament);
+                $temp_array['player_1_id'] = $tournament;
+                $temp_array['score_player_1'] = '-';
+
+            } else {
+                $temp_array['player_2'] = get_player_name($tournament);
+                $temp_array['player_2_id'] = $tournament;
+                $temp_array['score_player_2'] = '-';
+                $next_round[] = $temp_array;
+                $temp_array = [];
+            }
+
+
+        }
+        return $next_round;
+    }
+
+    public function get_round($no_of_players){
+        //if number is between specific range
+        $round = '';
+
+        if ($no_of_players == 2) {
+            $round = 'Final';
+        } elseif ($no_of_players >= 2 && $no_of_players <= 4) {
+            $round = 'Semi Final';
+        } elseif ($no_of_players >= 5 && $no_of_players <= 8) {
+            $round = 'Quarter Final';
+        } elseif ($no_of_players >= 9 && $no_of_players <= 16) {
+            $round = 'Round of 16';
+        } elseif ($no_of_players >= 17 && $no_of_players <= 32) {
+            $round = 'Round of 32';
+        } elseif ($no_of_players >= 33 && $no_of_players <= 64) {
+            $round = 'Round of 64';
+        } elseif ($no_of_players >= 65 && $no_of_players <= 128) {
+            $round = 'Round of 128';
+        }
+        return $round;
     }
 }

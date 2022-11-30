@@ -5,18 +5,20 @@
 @php
 $player1 = get_player_name($match->player_1 );
 $player2 = get_player_name($match->player_2 );
-
+$year = isset($match->year) ? $match->year : now();
 @endphp
 @section('scripts')
     <script>
+
         $(document).ready(function () {
 
             $(".daterange").daterangepicker({
                 singleDatePicker: true,
+                timePicker: true,
                 showDropdowns: true,
-                startDate: moment(),
+                startDate: '{!! $year !!}',
                 locale: {
-                    format: "Y-MM-DD"
+                    format: "Y-MM-DD HH:mm:ss"
                 }
             });
 
@@ -68,10 +70,10 @@ $player2 = get_player_name($match->player_2 );
                                     <label for="year">Year</label>
 
                                     <input
+                                        name="year"
                                         class="form-control form-control-lg daterange"
                                         type="text"
                                         value="{{ $match->year }}"
-                                        disabled
                                     />
 
                                 </div>

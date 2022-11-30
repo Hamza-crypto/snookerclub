@@ -37,7 +37,6 @@
                                 </div>
 
                             </div>
-
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
@@ -55,22 +54,40 @@
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label class="form-label" for="type"> Click here </label>
-                                        <button id="add"
-                                                class="btn btn-lg btn-primary form-control form-control-lg" @click="create_player_fields">CREATE
-                                        </button>
-                                    </div>
+                                        <label for="rules">Type</label>
+                                        <select
+                                            class="form-control form-control-lg"
+                                            name="type"
+                                            v-model="type">
+                                            <option value="snooker">Snooker</option>
+                                            <option value="8-pool">8-Pool</option>
+                                        </select>
 
+                                    </div>
 
                                 </div>
 
                             </div>
+                            <div class="row">
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="type"> Click here </label>
+                                    <button id="add"
+                                            class="btn btn-lg btn-primary form-control form-control-lg" @click="create_player_fields">CREATE
+                                    </button>
+                                </div>
+
+
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row" v-if="render_player_fields" v-for="i in number_of_players">
+        <div class="row" v-if="render_player_fields" v-for="i in total_matches">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
@@ -78,7 +95,7 @@
                             <div class="col-sm-2">
                                 <div class="form-group">
                                     <label class="form-label" for="type"> </label>
-                                    <button class="btn btn-lg btn-secondary form-control form-control-lg">MATCH 1
+                                    <button class="btn btn-lg btn-secondary form-control form-control-lg">MATCH {{i}}
                                     </button>
                                 </div>
                             </div>
@@ -136,7 +153,9 @@ export default {
         return {
             title: '',
             number_of_players: 0,
+            total_matches: 0,
             rules: 0,
+            type: 'snooker',
             render_player_fields: false,
             player1: [] ,
             player2: [] ,
@@ -145,7 +164,7 @@ export default {
     },
 
     mounted() {
-        this.fetch_players();
+
         // window.setInterval(() => {
         //     this.fetch_players()
         // }, 3 * 1000);
@@ -156,17 +175,24 @@ export default {
             var URL = '/api/players';
             axios.get(URL)
                 .then((response) => {
+
+                    var first = { id: 0, name: 'Bye' };
                     this.all_players = response.data;
+                    this.all_players.unshift(first);
+
                 });
 
         },
+
 
         create_tournament() {
 
             axios.post('/tournaments/create', {
                 title: this.title,
+                total_matches: this.total_matches,
                 number_of_players: this.number_of_players,
                 rules: this.rules,
+                type: this.type,
                 player1: this.player1,
                 player2: this.player2,
             })
@@ -181,6 +207,9 @@ export default {
 
         create_player_fields() {
             this.render_player_fields = true;
+            this.total_matches = (this.number_of_players/2);
+
+            this.fetch_players();
         },
 
         open_detail_page(id) {

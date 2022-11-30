@@ -60,6 +60,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('api/players', [TournamentController::class, 'get_players'])->name('tournaments.get_players');
     Route::post('tournaments/create', [TournamentController::class, 'store_tournament'])->name('tournaments.store_tournament');
 
+    //Tournament Brackets
+    Route::get('draw/{tournament}', [TournamentController::class, 'tournament_draw'])->name('tournaments.draw')->middleware('admin');
+
     Route::group(
         [
             'middleware' => 'admin',
