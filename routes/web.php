@@ -40,6 +40,9 @@ Route::get('stats', [TournamentController::class, 'stats'])->name('tournament.st
 
 Route::get('results2', [TournamentController::class, 'results2'])->name('tournament.results2');
 
+//Tournament Brackets
+Route::get('draw/{tournament}', [TournamentController::class, 'tournament_draw'])->name('tournaments.draw');
+
 Route::group(['middleware' => ['auth']], function () {
 
     Route::group([
@@ -60,8 +63,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('api/players', [TournamentController::class, 'get_players'])->name('tournaments.get_players');
     Route::post('tournaments/create', [TournamentController::class, 'store_tournament'])->name('tournaments.store_tournament');
 
-    //Tournament Brackets
-    Route::get('draw/{tournament}', [TournamentController::class, 'tournament_draw'])->name('tournaments.draw')->middleware('admin');
+
 
     Route::group(
         [
