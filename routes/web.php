@@ -22,8 +22,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/test', function() {
-    dd('Confirmed');
-    //
+   dd(now());
 });
 
 Route::get('/', [PlayerHistory::class, 'index_front'])->name('homepage.front');

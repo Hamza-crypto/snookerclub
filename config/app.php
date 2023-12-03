@@ -67,8 +67,8 @@ return [
     |
     */
 
-//    'timezone' => 'Africa/Casablanca',
-    'timezone' => 'Asia/Karachi',
+   'timezone' => 'Africa/Casablanca',
+    // 'timezone' => 'Asia/Karachi',
 
     /*
     |--------------------------------------------------------------------------
