@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Vehicle;
 
 class DashboardController extends Controller
 {
@@ -9,7 +8,6 @@ class DashboardController extends Controller
     {
         return view('pages.dashboard.index');
     }
-
 
 }
 
