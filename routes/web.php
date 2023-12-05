@@ -92,5 +92,3 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
 });
-
-// Just test
