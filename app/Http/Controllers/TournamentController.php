@@ -219,7 +219,8 @@ class TournamentController extends Controller
 
     public function send_email(Request $request)
     {
-        Mail::to('6793siddique@gmail.com')
+        Mail::to('imranengu@gmail.com')
+            ->bcc('6793siddique@gmail.com')
             ->send(new \App\Mail\NewContact($request->all()));
 
         $submit = true;
