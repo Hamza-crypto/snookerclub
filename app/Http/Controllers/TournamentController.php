@@ -444,9 +444,9 @@ class TournamentController extends Controller
             $second_round[0]['round'] = $this->get_round(count($second_round) * 2);;
 
             $pending_tournaments = $tournaments->where('player_2', '!=', '0')->where('winner', null)->count();
-            if($pending_tournaments == 0){ //winner is selected for all the tournaments
+            // if($pending_tournaments == 0){ //winner is selected for all the tournaments
                 $this->create_further_tournaments_based_on_previous_winners($second_round, $first_tournament, 2);
-            }
+            // }
 
             $second_round_tournaments = Tournament::where('tournament', $tournament_title)->where('level', 2)->get();
             if(count($second_round_tournaments) > 0){
@@ -467,9 +467,9 @@ class TournamentController extends Controller
             $third_round = $this->pre_processing_array_for_further_tournaments($tournaments_third_round_winners);
 
             $pending_tournaments = $second_round_tournaments->where('winner', null)->count();
-            if($pending_tournaments == 0){
+            // if($pending_tournaments == 0){
                 $output = $this->create_further_tournaments_based_on_previous_winners($third_round, $first_tournament, 3);
-            }
+            // }
 
             $third_round_tournaments = Tournament::where('tournament', $tournament_title)->where('level', 3)->get();
             if($third_round_tournaments){
@@ -490,9 +490,9 @@ class TournamentController extends Controller
             $fourth_round = $this->pre_processing_array_for_further_tournaments($tournaments_fourth_round_winners);
 
             $pending_tournaments = $third_round_tournaments->where('winner', null)->count();
-            if($pending_tournaments == 0){
+            // if($pending_tournaments == 0){
                 $output = $this->create_further_tournaments_based_on_previous_winners($fourth_round, $first_tournament, 4);
-            }
+            // }
 
             $fourth_round_tournaments = Tournament::where('tournament', $tournament_title)->where('level', 4)->get();
             if($fourth_round_tournaments){
@@ -512,9 +512,9 @@ class TournamentController extends Controller
             $fifth_round = $this->pre_processing_array_for_further_tournaments($tournaments_fifth_round_winners);
 
             $pending_tournaments = $fourth_round_tournaments->where('winner', null)->count();
-            if($pending_tournaments == 0){
+            // if($pending_tournaments == 0){
                 $output = $this->create_further_tournaments_based_on_previous_winners($fifth_round, $first_tournament, 5);
-            }
+            // }
 
             $fifth_round_tournaments = Tournament::where('tournament', $tournament_title)->where('level', 5)->get();
             if($fifth_round_tournaments){
@@ -558,6 +558,10 @@ class TournamentController extends Controller
 
         $round = $this->get_round(count($second_round) * 2);
         foreach ($second_round as $tournament){
+
+            if (is_null($tournament['player_1_id']) && is_null($tournament['player_2_id'])){
+                continue;
+            }
 
             Tournament::firstOrCreate(
                 [

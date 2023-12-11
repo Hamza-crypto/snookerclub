@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/test', function() {
    dd(now());
+
+   // new branch
 });
 
 Route::get('/', [PlayerHistory::class, 'index_front'])->name('homepage.front');
@@ -92,3 +94,5 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
 });
+
+// New
