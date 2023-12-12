@@ -191,11 +191,11 @@ class TournamentController extends Controller
         $status = '';
         if (in_array($match->status, [1, 4])) {
             $status = 'LIVE';
-        } else if ($match->status == 2) {
+        } elseif ($match->status == 2) {
             $status = 'Interrupted';
-        } else if ($match->status == 3) {
+        } elseif ($match->status == 3) {
             $status = 'Break';
-        } else if ($match->status == 5) {
+        } elseif ($match->status == 5) {
             $status = 'Finished';
         }
 
@@ -550,6 +550,15 @@ class TournamentController extends Controller
             ];
         });
 
+        // Check if the collection has only one item
+        if ($tournaments->count() == 1) {
+            // Duplicate the item with null values for each key
+            $original_item = $tournaments->first();
+            $duplicated_item = array_fill_keys(array_keys($original_item), null);
+
+            // Add the duplicated item to the collection
+            $tournaments->push($duplicated_item);
+        }
 
          return [$tournaments, $second_array];
     }
@@ -559,7 +568,7 @@ class TournamentController extends Controller
         $round = $this->get_round(count($second_round) * 2);
         foreach ($second_round as $tournament){
 
-            if (is_null($tournament['player_1_id']) && is_null($tournament['player_2_id'])){
+            if (is_null($tournament['player_1_id']) || is_null($tournament['player_2_id'])) {
                 continue;
             }
 
