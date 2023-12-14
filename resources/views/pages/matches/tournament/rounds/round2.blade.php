@@ -1,8 +1,8 @@
 <div id="2" class="draw__round ">
     <div class="draw__header">
-        <div class="draw__arrow draw__arrow--previous"></div>
+        {{-- <div class="draw__arrow draw__arrow--previous"></div> --}}
         <div class="draw__label"> {!! $second_round[0]['round'] ?? '' !!} </div>
-        <div class="draw__arrow draw__arrow--next"></div>
+        {{-- <div class="draw__arrow draw__arrow--next"></div> --}}
     </div>
     <div class="draw__brackets ">
         @foreach ($second_round as $tournament)
