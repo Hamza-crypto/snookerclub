@@ -42,10 +42,12 @@
                     <div class="tournamentHeader tournamentHeaderDescription">
                         <div class="tournamentHeader__sportContent "><span class="tournamentHeader__flagIcon"><span
                                     class=" flag fl_3473162" title=""></span><i
-                                    class="fa-solid fa-user"></i></span><span class="tournamentHeader__country">US Open
-                                (USA), hard</span></div>
+                                    class="fa-solid fa-user"></i></span><span
+                                class="tournamentHeader__country">{{ $tournament_title ?? '-' }}</span>
+                        </div>
                         <div class="dropDown dropDown--tableDraw">
-                            <div class="dropDown__selectedValue " tabindex="0">2022</div>
+                            <div class="dropDown__selectedValue " tabindex="0">
+                                {{ $first_tournament->year->format('Y') }}</div>
                         </div>
                     </div>
                     <div>
@@ -305,11 +307,11 @@
                         <div class="subTabs subTabs--mobileResolver"></div>
                         <div class="draw__cover">
                             <div class="draw__container">
-                                <div class="shifter undefined">
+                                {{-- <div class="shifter undefined">
                                     <div id="prvStage" class="shifter__stage shifter__stage--previous">
                                         Previous stage</div>
                                     <div id="nextstage" class="shifter__stage shifter__stage--next">Next Stage</div>
-                                </div>
+                                </div> --}}
                                 <div class="draw__wrapper" id="drawWrapper">
                                     <div class="draw__shadowHeader"></div>
                                     <div class="draw__clearHeader"></div>
